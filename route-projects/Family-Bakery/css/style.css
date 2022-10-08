@@ -319,7 +319,6 @@ h1 {
 
 /* start navbar */
 .navbar {
-
     z-index: 9999;
     box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2);
     font-family: 'Alegreya', serif;
