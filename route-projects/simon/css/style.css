@@ -1545,7 +1545,7 @@ nav a:hover {
     color: #dee3e4;
     opacity: 0.4;
     font-weight: 600;
-    font-size: calc(1.95rem + 8.4vw);
+    font-size: calc(1.35rem + 8.4vw);
     font-family: 'Poppins', sans-serif;
     
 }
