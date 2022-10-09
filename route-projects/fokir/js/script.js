@@ -23,7 +23,6 @@ $(document).ready(() =>
                 })
         });
     })
-    let
 })
 
 $(window).scroll(() =>
