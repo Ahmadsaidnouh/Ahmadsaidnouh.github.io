@@ -24,35 +24,36 @@
     </div>
 
     <header id="head">
-        <nav>
+        <nav class="nav-1">
             <img src="./imgs/logo-light.png" alt="">
-            <a href="#" style="color: #20c997;">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">What I Do</a>
-            <a href="#resume">Resume</a>
-            <a href="#porto">Portfolio</a>
-            <a href="#testi">Client</a>
-            <a href="#contact">Contact</a>
-            <!-- </div> -->
+            <a data-link="#head" class="active">Home</a>
+            <a data-link="#about">About</a>
+            <a data-link="#services">What I Do</a>
+            <a data-link="#resume">Resume</a>
+            <a data-link="#porto">Portfolio</a>
+            <a data-link="#testi">Client</a>
+            <a data-link="#contact">Contact</a>
         </nav>
-        <div class="nav-2">
+        <nav class="nav-2">
             <img src="./imgs/logo-light.png" alt="">
             <div class="nav-2-i">
-                <div class="lines top-line"></div>
-                <div class="lines mid-line"></div>
-                <div class="lines bottom-line"></div>
+                <div id="navToggler">
+                    <div class="lines top-line"></div>
+                    <div class="lines mid-line"></div>
+                    <div class="lines bottom-line"></div>
+                </div>
                 <div class="nav-2-content">
-                    <a href="#" style="color: #20c997;">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#services">What I Do</a>
-                    <a href="#resume">Resume</a>
-                    <a href="#porto">Portfolio</a>
-                    <a href="#testi">Client</a>
-                    <a href="#contact" style="border-bottom: 0px;">Contact</a>
+                    <a data-link="#head" class="active">Home</a>
+                    <a data-link="#about">About</a>
+                    <a data-link="#services">What I Do</a>
+                    <a data-link="#resume">Resume</a>
+                    <a data-link="#porto">Portfolio</a>
+                    <a data-link="#testi">Client</a>
+                    <a data-link="#contact" style="border-bottom: 0px;">Contact</a>
                 </div>
             </div>
 
-        </div>
+        </nav>
         <div class="header-filter">
             <p class="up-p">Welcome</p>
             <div class="typer">
@@ -62,14 +63,14 @@
                     <li>I'm a Photographer.</li>
                     <li>I'm a Designer.</li>
                 </ul>
-
             </div>
             <p class="down-p">based in Los Angeles, California.</p>
-            <a href="" class="hire">Hire Me</a>
-            <a href="#about" class="chevron"><i class="fas fa-chevron-down"></i></a>
+            <a class="hire">Hire Me</a>
+            <a class="chevron"><i class="fas fa-chevron-down"></i></a>
         </div>
     </header>
-    <div class="about" id="about">
+
+    <section class="about" id="about">
         <div class="about-head">
             <h2>ABOUT ME</h2>
             <p>Know Me More <span></span></p>
@@ -87,15 +88,16 @@
             <div class="about-cont-right">
                 <ul>
                     <li><span>Name:</span> Simone Olivia</li>
-                    <li><span>Email:</span><a href=""> chat@simone.com</a></li>
+                    <li><span>Email:</span><a > chat@simone.com</a></li>
                     <li><span>Age:</span> 28</li>
                     <li style="border-bottom: 0px;"><span>From:</span> Los Angeles, California</li>
                 </ul>
-                <a href="" class="about-cont-right-a">Download CV</a>
+                <a class="about-cont-right-a">Download CV</a>
             </div>
         </div>
-    </div>
-    <div class="counts" >
+    </section>
+
+    <section class="counts" >
         <div class="count-items item1">
             <h4>10+</h4>
             <p>Years Experience</p>
@@ -112,8 +114,9 @@
             <h4>38</h4>
             <p>Get Awards</p>
         </div>
-    </div>
-    <div class="services" id="services">
+    </section>
+
+    <section class="services" id="services">
         <div class="services-head">
             <h2>SERVICES</h2>
             <p>What I Do? <span></span></p>
@@ -168,8 +171,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="resume" id="resume">
+    </section>
+
+    <section class="resume" id="resume">
         <div class="resume-head">
             <h2>SUMMARY</h2>
             <p>Resume <span></span></p>
@@ -268,19 +272,20 @@
 
                 </div>
             </div>
-            <a href="">Download CV <i class="fas fa-download"></i></a>
+            <a >Download CV <i class="fas fa-download"></i></a>
         </div>
-    </div>
-    <div class="porto" id="porto">
+    </section>
+
+    <section class="porto" id="porto">
         <div class="porto-head">
             <h2>PORTFOLIO</h2>
             <p>My Work <span></span></p>
         </div>
         <div class="porto-opts">
-            <a href="" style="color: #20c997; border-bottom: 2px solid #20c997;">All</a>
-            <a href="">Design</a>
-            <a href="">Brand</a>
-            <a href="">Photos</a>
+            <a  style="color: #20c997; border-bottom: 2px solid #20c997;">All</a>
+            <a >Design</a>
+            <a >Brand</a>
+            <a>Photos</a>
         </div>
         <div class="porto-content">
             <div class="porto-cont-items img1">
@@ -333,14 +338,14 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="testi" id="testi">
+    </section>
+
+    <section class="testi" id="testi">
         <div class="testi-head">
             <h2>TESTIMONIAL</h2>
             <p>Client Speak <span></span></p>
         </div>
         <div class="testi-content">
-            <!-- <div class="dot-left"></div> -->
             <div class="filter1"></div>
             <div class="filter2"></div>
             <div class="dots">
@@ -426,8 +431,9 @@
 
             </div>
         </div>
-    </div>
-    <div class="contact" id="contact">
+    </section>
+
+    <section class="contact" id="contact">
         <div class="contact-head">
             <h2 class="c-h2">CONTACT</h2>
             <p>Get in Touch <span></span></p>
@@ -440,7 +446,7 @@
                     <input type="email" name="email" placeholder="Email" id="email" required>
                     <textarea type="email" name="email" placeholder="Tell us more about your needs..." id="message"
                         required></textarea>
-                    <a href="">Send Message</a>
+                    <a>Send Message</a>
 
                 </div>
             </div>
@@ -456,22 +462,25 @@
 
             </div>
         </div>
-    </div>
+    </section>
 
     <footer>
-        <div class="copy-r"> Copyright Â© 2021 <a href="">Simone</a>. All Rights Reserved.</div>
+        <div class="copy-r"> Copyright Â© 2021 <a >Simone</a>. All Rights Reserved.</div>
         <div class="links">
-            <a href="">Terms & Policy</a>
-            <a href="" style="border-left: 1px solid #777777d2; padding-left: 16px;">Disclaimer</a>
+            <a >Terms & Policy</a>
+            <a  style="border-left: 1px solid #777777d2; padding-left: 16px;">Disclaimer</a>
         </div>
     </footer>
-    <a href="#head" class="scroll-up">
-        <i class="fas fa-chevron-up"></i>
-        <div class="scroll-text">Back to Top</div>
-        <i class="fas fa-caret-right arrow"></i>
-    </a>
 
-    <div class="aside">
+    <div id="moveToTop" >
+        <a class="scroll-up">
+            <i class="fas fa-chevron-up"></i>
+            <div class="scroll-text">Back to Top</div>
+            <i class="fas fa-caret-right arrow"></i>
+        </a>
+    </div>
+
+    <section class="aside">
         <i class="fas fa-cog"></i>
         <div class="aside-content">
             <h2>Color Switcher</h2>
@@ -517,9 +526,9 @@
                     <i class="fas fa-caret-down"></i>
                 </div>
             </div>
-            <a href="">Reset Default Teal</a>
+            <a >Reset Default Teal</a>
         </div>
-    </div>
+    </section>
 
     <script src="js/jquery-3.6.1.min.js"></script>
     <script src="js/script.js"></script>
