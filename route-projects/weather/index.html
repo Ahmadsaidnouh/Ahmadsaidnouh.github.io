@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="favicon" href="">
+    <title>Weather</title>
+    <link rel="icon" href="./images/logo.png" type="image/icon type">
+
+    <!--start google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!--end google fonts -->
+    
+    <!-- font awesome -->
+    <link rel="stylesheet" href="./css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- our css -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- be sure to open it with live server -->
+    <!-- be sure to open it with live server -->
+    <!-- be sure to open it with live server -->
+    <!-- be sure to open it with live server -->
+
+    <!-- start loading -->
+    <section id="loadingPg">
+        <div class="loading-page d-flex justify-content-center align-items-center">
+            <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </section>
+    <!-- end loading -->
+
+    <!-- start navbar -->
+    <header>
+        <nav class=" py-5">
+            <div class="container d-flex justify-content-between  pb-1 pb-md-0 flex-wrap">
+                <div class="pointer logo d-flex align-items-start">
+                    <img src="./images/logo.png" alt="">
+                    <div class="logo-text d-flex flex-column justify-content-start">
+                        <h1>Weather</h1>
+                        <small>tangline goes here</small>
+                    </div>
+
+                </div>
+                <div class="options d-none d-lg-block">
+                    <ul class="d-flex justify-content-between list-unstyled">
+                        <li><a href="" class="home">Home</a></li>
+                        <li><a href="">News</a></li>
+                        <li><a href="">Live cameras</a></li>
+                        <li><a href="">Photos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <i id="navToggleBtn" class="fas fa-lg fa-bars d-block d-lg-none"></i>
+            </div>
+            <div class="container d-block d-lg-none">
+                <div id="toggleOptions">
+                    <ul class="list-unstyled w-100">
+                        <li><a class="w-100 h-100 d-flex justify-content-center align-items-center" href="" style="color: #009ad8;">Home</a></li>
+                        <li><a class="w-100 h-100 d-flex justify-content-center align-items-center" href="">News</a></li>
+                        <li><a class="w-100 h-100 d-flex justify-content-center align-items-center" href="">Live cameras</a></li>
+                        <li><a class="w-100 h-100 d-flex justify-content-center align-items-center" href="">Photos</a></li>
+                        <li style="border: 0;"><a class="w-100 h-100 d-flex justify-content-center align-items-center" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- end navbar -->
+
+    <!-- start website body -->
+    <main>
+        <div class="search-box">
+            <div class="container">
+                <div class="search-components  position-relative">
+                    <input type="text" placeholder="Find your location..." id="search" class="form-inputs">
+                    <input type="button" value="Find" id="searchBtn" class="form-btns">
+                </div>
+            </div>
+        </div>
+        <div class="forecast-table">
+            <div class="container">
+                <div id="forecast">
+                    <!-- <div class="row gx-0">
+                        <div class="col-lg-4" id="today">
+                            <div class="forecast-header d-flex justify-content-between">
+                                <div class="day">Tuesday</div>
+                                <div class="date">7October</div>
+                            </div>
+                            <div class="forecast-body text-start">
+                                <div class="location">Location</div>
+                                <div class="degree d-flex flex-md-column flex-row">
+                                    <div class="temperature">temp</div>
+                                    <img src="./iron.jpg" class="w-75" alt="">
+                                </div>
+                                <div class="custom">Moist</div>
+                                <div class="details d-flex flex-wrap">
+                                    <div class="rain details-items d-flex ">
+                                        <img src="./images/icon-umberella.png" alt="">
+                                        <span>20%</span>
+                                    </div>
+                                    <div class="wind-speed details-items d-flex ">
+                                        <img src="./images/icon-wind.png" alt="">
+                                        <span>18km/h</span>
+                                    </div>
+                                    <div class="wind-direction details-items d-flex ">
+                                        <img src="./images/icon-compass.png" alt="">
+                                        <span>East</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" id="tomorrow">
+                            <div class="forecast-header text-center">
+                                <div class="day">Tuesday</div>
+                            </div>
+                            <div class="forecast-body text-center">
+                                <img src="./images/icon-umberella.png" alt="">
+                                <div class="degree">30C</div>
+                                <small>30C</small>
+                                <div class="custom">Moist</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" id="afterTomorrow">
+                            <div class="forecast-header text-center">
+                                <div class="day">Tuesday</div>
+                            </div>
+                            <div class="forecast-body text-center">
+                                <img src="./images/icon-umberella.png" alt="">
+                                <div class="degree">30C</div>
+                                <small>30C</small>
+                                <div class="custom">Moist</div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- end website body -->
+    
+    <!-- start footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="search-components  position-relative">
+                        <input type="email" placeholder="Enter your email to subscribe..."  class="form-inputs">
+                        <input type="button" value="Subscribe"  class="form-btns">
+                    </div>
+                </div>
+                <div class="col-md-3 offset-md-1 d-flex justify-content-start mt-4 mt-md-0">
+                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-google-plus-g"></i></a>
+                    <a href=""><i class="fab fa-pinterest"></i></a>
+                </div>
+                <div class="col-12">
+                    <p>Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+
+    <!-- jquery -->
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <!-- bootstrap -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- our javascript -->
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
