@@ -45,7 +45,7 @@ function displaySection(sectionName)
         // console.log(currentSectionName, sectionName, `.section.${sectionName}`);
         document.querySelector(`.section.${currentSectionName}`).style.zIndex = "0"
         document.querySelector(`.section.${sectionName}`).style.zIndex = "1"
-        document.querySelector(`.section.${sectionName}`).style.left = (screenWidth > 1199) ? "270px": "0";
+        document.querySelector(`.section.${sectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
         setTimeout(() =>
         {
             document.querySelector(`.section.${currentSectionName}`).style.left = "100%"
@@ -54,7 +54,59 @@ function displaySection(sectionName)
 
     }
 }
-window.addEventListener('resize', () => {
+window.addEventListener('resize', () =>
+{
     let screenWidth = window.innerWidth;
-    document.querySelector(`.section.${currentSectionName}`).style.left = (screenWidth > 1199) ? "270px": "0";
+    document.querySelector(`.section.${currentSectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
+});
+
+function displayCopiedMessage(messageContainer)
+{
+    document.querySelector(`.${messageContainer} .message-tip`).style.display = "flex"
+    setTimeout(() =>
+    {
+        document.querySelector(`.${messageContainer} .message-tip`).style.display = "none"
+    }, 1500)
+}
+
+function copyToClipboard(text, messageContainer)
+{
+    // create a temporary textarea element to hold the text
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+
+    // select the text and copy it to the clipboard
+    textarea.select();
+    document.execCommand('copy');
+
+    // remove the temporary element from the document
+    document.body.removeChild(textarea);
+
+    displayCopiedMessage(messageContainer)
+}
+
+
+
+
+
+
+
+
+
+const scrollPicker = document.querySelector('.scroll-picker ul');
+let selectedIndex = 1;
+let oldselectedIndex = 1;
+
+scrollPicker.addEventListener('scroll', () =>
+{
+    oldselectedIndex = selectedIndex
+    const scrollTop = scrollPicker.scrollTop;
+    const optionHeight = scrollPicker.querySelector('li').offsetHeight;
+    selectedIndex = Math.round(scrollTop / optionHeight);
+    scrollPicker.querySelectorAll('li')[selectedIndex].classList.add('selected')
+    if (selectedIndex != oldselectedIndex)
+        scrollPicker.querySelectorAll('li')[oldselectedIndex].classList.remove('selected')
+    // console.log(selectedIndex, oldselectedIndex);
+    //   selectedIndex = scrollPicker.querySelectorAll('li')[selectedIndex].textContent;
 });
