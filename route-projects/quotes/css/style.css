@@ -8,10 +8,10 @@ p {
 }
 
 button {
-    width: 200px !important;
-    height: 80px !important;
+    width: 150px !important;
+    height: 60px !important;
     color: white !important;
-    
+    border-radius: 30px !important;
 }
 
 button:hover {

@@ -31,10 +31,10 @@ function displayData() {
 
     for (let i = 0; i < data.length; i++) {
         if (data[i].media_type == 'movie') {
-            movieCartona += `<div class="col-md-3">
-            <div class="mt-4 items position-relative" onclick="displayLightBox(${i},'Movie')">
+            movieCartona += `<div class="col-md-3 mb-4">
+            <div class="mt-4 items bg-dark position-relative" onclick="displayLightBox(${i},'Movie')">
             <img src="https://image.tmdb.org/t/p/w500${data[i].poster_path}" class="w-100" alt="">
-            <div class="bg-dark items-text p-1">
+            <div class="items-text p-1">
             <h3 class="text-white">${data[i].title}</h3>
             <p class="text-white m-0">${data[i].overview.split(' ').splice(0, 10).join(' ')}...</p>
             </div>
@@ -44,10 +44,10 @@ function displayData() {
         }
         else if (data[i].media_type == 'tv') {
 
-            tvCartona += `<div class="col-md-3">
-            <div class="mt-4 items position-relative bg-dark" onclick="displayLightBox(${i},'TV') ">
+            tvCartona += `<div class="col-md-3 mb-4">
+            <div class="mt-4 items bg-dark position-relative" onclick="displayLightBox(${i},'TV') ">
             <img src="https://image.tmdb.org/t/p/w500${data[i].poster_path}" class="w-100" alt="">
-            <div class="bg-dark items-text p-1">
+            <div class="items-text p-1">
             <h3 class="text-white">${data[i].name}</h3>
             <p class="text-white">${data[i].overview.split(' ').splice(0, 10).join(' ')}...</p>
             </div>

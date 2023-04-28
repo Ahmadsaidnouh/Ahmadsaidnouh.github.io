@@ -34,7 +34,7 @@
     padding: 5px 15px;
     background-color: rgba(0, 204, 255, 0.87);
     font-weight: 600;
-    border-top-left-radius: 10px;
+    /* border-top-left-radius: 10px; */
     border-bottom-left-radius: 10px;
 }
 
@@ -43,12 +43,13 @@
 }
 
 .items {
+    height: 100% !important;
     border-radius: 6px;
     overflow: hidden;
     transition: all 0.5s ease;
 }
 .items:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .items h3 {
@@ -96,4 +97,3 @@
         height: 80vh;
     }
 }
-

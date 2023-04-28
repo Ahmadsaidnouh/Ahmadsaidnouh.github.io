@@ -17,15 +17,31 @@ var quotes = [
     { quote: "\"To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.\"", author: "― Ralph Waldo Emerson" }
 ]
 
-function getRndInteger(min, max) {
+function getRndInteger(min, max)
+{
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function displayQuote() {
+function displayQuote()
+{
     do {
-        var index = getRndInteger(0,quotes.length);
+        var index = getRndInteger(0, quotes.length);
     } while (index == prevIndex);
     prevIndex = index;
     quoteHolder.innerHTML = quotes[index].quote;
     authorHolder.innerHTML = quotes[index].author;
+    // Get the height of the document
+    const documentHeight = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+    );
+
+    // Scroll to the bottom of the page
+    window.scrollTo({
+        top: documentHeight,
+        behavior: 'smooth' // You can also set this to 'auto' for instant scrolling
+    });
 }

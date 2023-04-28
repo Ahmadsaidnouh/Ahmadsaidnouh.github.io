@@ -84,8 +84,8 @@ function displayURLs() {
     let cartona = ``;
     for(let i = 0; i < URLs.length; i++)
     {
-        cartona += `<div class="url-table-row">
-        <div class="w-50 d-flex justify-content-between p-3 mt-4">
+        cartona += `<div class="url-table-row rounded">
+        <div class="w-100 d-flex justify-content-between p-3 mt-4">
         <h3>${URLs[i].name}</h3>
         <div>
             <a href="${URLs[i].url}" target="_blank" class="btn btn-primary me-1">Visit</a>
