@@ -1,0 +1,39 @@
+.header h3 {
+    color: #aaa;
+    font-size: 50px;
+}
+.text-container {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.text-container-inner {
+    background-color: #eee;
+}
+.text-container-inner p{
+    font-weight: 600;
+    font-size: 20px;
+}
+.text-container-inner input{
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+.url-table-row {
+    background-image: linear-gradient(#eee, #fff);
+}
+.copy-rights {
+    font-weight: 600;
+    color: #aaa;
+}
+.dark-danger {
+    border-color: rgb(172, 12, 12);
+    color: rgb(172, 12, 12);
+    font-weight: 700;
+}
+
+
+button:hover , a:hover {
+    box-shadow: 3px 3px 7px black;
+}
+input:hover {
+    box-shadow: 0px 0px 12px -7px #888;
+}

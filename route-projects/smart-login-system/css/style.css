@@ -1,0 +1,39 @@
+.main-bgc {
+  background-color: #24353f !important;
+}
+
+.main-color {
+  color: #17a2bb !important;
+}
+
+.main-shadow {
+  box-shadow: -5px 2px 54px -9px rgb(0 0 0);
+}
+
+h1 {
+  font-size: 40px;
+}
+
+#signUp:hover,
+#signIn:hover {
+  text-decoration: underline !important;
+}
+#signUp,
+#signIn {
+  cursor: pointer;
+}
+input:focus {
+  box-shadow: 0 0 0 0 rgb(13 110 253 / 25%) !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0 !important;
+}
+
+.home-section {
+  height: calc(100vh - 58px);
+}
+
+input::placeholder {
+    color: #ced4da !important;
+}

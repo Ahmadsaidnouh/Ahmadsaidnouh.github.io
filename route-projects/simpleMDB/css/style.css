@@ -1,0 +1,99 @@
+/* start navbar */
+.navbar a {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.navbar-brand{
+    font-size: 25px !important;
+    font-weight: 700 !important;
+}
+@media screen and (min-width: 992px) {
+
+    .navbar-collapse {
+        justify-content: end;
+    }
+}
+
+.navbar-toggler {
+    border: 0;
+}
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0rem;
+}
+/* end navbar */
+
+#movies , #tv{
+    padding-top: 70px;
+}
+
+.rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 15px;
+    background-color: rgba(0, 204, 255, 0.87);
+    font-weight: 600;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.items , #lightBox i {
+    cursor: pointer;
+}
+
+.items {
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+.items:hover {
+    transform: scale(1.05);
+}
+
+.items h3 {
+    font-size: 1.5rem;
+}
+.items p {
+    font-size: 0.75rem;
+}
+
+.light-box-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+#close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
+}
+
+
+/* #lightBoxText p{
+    height: 80vh;
+    max-lines: 3;
+} */
+
+#lightBox span {
+    font-size: 25px;
+    font-weight: normal;
+}
+
+@media screen and (max-width:996px) {
+    #lightBoxImg img {
+        width: 120% !important;
+    }
+}
+@media screen and (max-width:576px) {
+    #lightBoxText {
+        height: 80vh;
+    }
+}
+

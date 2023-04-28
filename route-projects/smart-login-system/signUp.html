@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="main-bgc">
+
+
+    <section>
+        <div class="container mt-5">
+            <div id="signInContent" class="main-shadow p-5 main-bgc d-flex flex-column align-items-center w-75 m-auto">
+                <h1 class="text-center mb-2 main-color">Smart Login System</h1>
+                <input type="text" placeholder="Enter your name" class="form-control main-bgc text-white w-100 my-3" id="nUserName">
+                <input type="email" placeholder="Enter your email" class="form-control main-bgc text-white w-100 mb-3" id="nUserEmail">
+                <input minlength="4" type="password" placeholder="Enter password" class="form-control main-bgc text-white w-100 mb-3" id="nUserPass">
+                <span id="signUpMessage" class="text-center text-white p-1 d-none fs-5">Success</span>
+                <button type="submit" id="signUpBtn" onclick="signUp()" class="btn btn-outline-info w-100 my-3">Sign Up</button>
+                <p class="text-white mb-3 text-center">You have an account? <a id="signIn" href="index.html" class="text-decoration-none text-white">SignIn</a></p>
+            </div>
+        </div>
+    </section>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

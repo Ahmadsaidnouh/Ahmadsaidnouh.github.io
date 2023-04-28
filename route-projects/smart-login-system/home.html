@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="main-bgc">
+
+    <nav class="navbar navbar-expand-lg navbar-dark main-bgc main-shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">SMART LOGIN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mt-lg-0 mt-3">
+                    <li class="nav-item">
+                        <a onclick="logout();" class="nav-link btn btn-outline-warning" aria-current="page">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home-section w-100 d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class=" w-75 m-auto p-5 main-bgc main-shadow">
+                <h1 id="welcomeMessage" class="text-center main-color"></h1>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

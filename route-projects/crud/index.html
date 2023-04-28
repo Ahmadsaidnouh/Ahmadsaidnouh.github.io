@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="w-50 mx-auto mt-5">
+        <div class="warning form-control text-center text-danger bg-danger bg-opacity-25" id="warning">Must enter all data</div>
+        <div class="form-gorup my-3">
+            <label for="productName" class="py-2">Name:</label>
+            <input type="text" class="form-control" id="productName" required>
+        </div>
+        <div class="form-gorup my-3">
+            <label for="productCategory" class="py-2">Category:</label>
+            <input type="text" class="form-control" id="productCategory" required>
+        </div>
+        <div class="form-gorup my-3">
+            <label for="productPrice" class="py-2">Price:</label>
+            <input type="text" class="form-control" id="productPrice" required>
+        </div>
+        <button class="btn btn-primary mt-2 mb-5" onclick="controlFun();" id="controlBtn">Add</button>
+        <input type="text" placeholder="search" class="form-control mb-5" id="searchBtn" onkeyup="search(this.value);">
+        <table class="table text-center">
+            <thead>
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>update</th>
+                    <th>delete</th>
+            </thead>
+            <tbody id="tBody">
+                <!-- <tr>
+                    <td>toshiba</td>
+                    <td>tosh</td>
+                    <td>1200</td>
+                    <td><button class="btn btn-info">update</button></td>
+                    <td><button class="btn btn-danger">Delete</button></td>
+                </tr> -->
+            </tbody>
+
+        </table>
+    </div>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

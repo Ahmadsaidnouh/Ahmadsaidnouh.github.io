@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="col-12 header my-5">
+            <h3 class="text-start">Bookmarker</h3>
+        </div>
+    </div>
+    <div class="container text-container py-4">
+        <div class="col-12">
+            <div class="text-container-inner d-flex flex-column align-items-center">
+                <h2 class="my-5 text-center">Bookmark your favorite sites</h2>
+                <p class="mb-2">Site Name</p>
+                <input id="name" type="text" placeholder="Bookmark Name" class="w-75 p-1">
+                <div id="nameWarning" class="d-none form-control mt-2 w-75 dark-danger bg-danger bg-opacity-25 text-center"></div>
+                <p class="mb-2 mt-4 ">Site URL</p>
+                <input id="url" type="text" placeholder="website URL" class="w-75 p-1">
+                <div id="urlWarning" class="d-none form-control mt-2 w-75 dark-danger bg-danger bg-opacity-25 text-center">URL field is required</div>
+                <button class="btn btn-primary mb-5 mt-4" id="submit">Submit</button>
+            </div>
+            <div id="url-table">
+                <!-- will be filled automatically -->
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <p class="copy-rights">© 2019 Bookmarker Inc.</p>
+    </div>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
