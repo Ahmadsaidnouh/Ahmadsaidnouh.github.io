@@ -714,11 +714,71 @@ h3.my-profession {
     max-width: 33.33%;
     margin-bottom: 30px;
 }
-
-.portfolio .portfolio-item-inner {
-    border: 6px solid var(--bg-black-100);
+.red {
+    background-color: red !important;
+}
+.portfolio .portfolio-item-content {
+    background-color: var(--bg-black-100);
+    /* border: 3px solid var(--bg-black-100); */
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
+}
+.portfolio .portfolio-item-content::before,
+.portfolio-item-content > .portfolio-border {
+    /* background: radial-gradient(
+     600px circle at var(--mouse-x) var(--mouse-y),
+     rgba(255, 255, 255, 0.15),
+     transparent 40%   
+    ); */
+    /* background-color: #e8dfec; */
+    border-radius: inherit;
+    content: '';
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.portfolio .portfolio-item-content::before {
+    background: radial-gradient(
+     600px circle at var(--mouse-x) var(--mouse-y),
+     rgba(255, 255, 255, 0.15),
+     transparent 40%   
+    );
+    z-index: 3;
+}
+.portfolio-item-content > .portfolio-border {
+    background: radial-gradient(
+     300px circle at var(--mouse-x) var(--mouse-y),
+     rgba(255, 255, 255, 0.3),
+     transparent 40%   
+    );
+    z-index: 1;
+}
+#cards:hover > .portfolio-item > .portfolio-item-content > .portfolio-border {
+    opacity: 1;
+}
+.portfolio .portfolio-item-content:hover::before {
+    opacity: 1;
+}
+.portfolio-item-content > .portfolio-cont {
+    overflow: hidden;
+    background-color: var(--bg-black-900);
+    border-radius: inherit;
+    height: calc(100% - 4px);
+    width: calc(100% - 4px);
+    margin: 2px;
+    position: relative;
+    z-index: 2;
+}
+.portfolio .portfolio-item-inner {
+    /* border: 6px solid var(--bg-black-100);
+    border-radius: 10px; */
+    /* overflow: hidden; */
     cursor: pointer;
     position: relative;
 }
@@ -762,6 +822,11 @@ h3.my-profession {
 .portfolio .portfolio-item-inner .portfolio-img img {
     width: 100%;
     display: block;
+}
+.portfolio .portfolio-details {
+    cursor: default;
+    padding: 5px;
+    color: var(--text-black-900);
 }
 
 /* contact */

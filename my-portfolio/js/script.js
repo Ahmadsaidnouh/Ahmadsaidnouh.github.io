@@ -89,24 +89,54 @@ function copyToClipboard(text, messageContainer)
 
 
 
+// Glow effent
+// const handleOnMouseMove = e =>
+// {
+//     const { currentTarget: target } = e;
+//     // console.log(target.previousElementSibling);
+//     // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
+//     const rect = target.getBoundingClientRect(),
+//         x = e.clientX - rect.left,
+//         y = e.clientY - rect.top;
+//     // y = e.clientY - rect.top + imageHeight;
 
+//     // console.log(imageHeight,rect.left,rect.top,x,y);
+//     target.style.setProperty("--mouse-x", `${x}px`)
+//     target.style.setProperty("--mouse-y", `${y}px`)
+// }
 
-
-
-
-const scrollPicker = document.querySelector('.scroll-picker ul');
-let selectedIndex = 1;
-let oldselectedIndex = 1;
-
-scrollPicker.addEventListener('scroll', () =>
+// for (const card of document.querySelectorAll(".portfolio-item-content")) {
+//     card.onmousemove = e => handleOnMouseMove(e);
+// }
+const cards = document.getElementsByClassName("portfolio-item-content")
+document.getElementById("cards").onmousemove = e =>
 {
-    oldselectedIndex = selectedIndex
-    const scrollTop = scrollPicker.scrollTop;
-    const optionHeight = scrollPicker.querySelector('li').offsetHeight;
-    selectedIndex = Math.round(scrollTop / optionHeight);
-    scrollPicker.querySelectorAll('li')[selectedIndex].classList.add('selected')
-    if (selectedIndex != oldselectedIndex)
-        scrollPicker.querySelectorAll('li')[oldselectedIndex].classList.remove('selected')
-    // console.log(selectedIndex, oldselectedIndex);
-    //   selectedIndex = scrollPicker.querySelectorAll('li')[selectedIndex].textContent;
-});
+    let cX = e.clientX, cY = e.clientY;
+    for (const card of cards) {
+        const rect = card.getBoundingClientRect(),
+            x = cX - rect.left,
+            y = cY - rect.top;
+        // y = e.clientY - rect.top + imageHeight;
+
+        // console.log(imageHeight,rect.left,rect.top,x,y);
+        card.style.setProperty("--mouse-x", `${x}px`)
+        card.style.setProperty("--mouse-y", `${y}px`)
+    }
+}
+
+// const scrollPicker = document.querySelector('.scroll-picker ul');
+// let selectedIndex = 1;
+// let oldselectedIndex = 1;
+
+// scrollPicker.addEventListener('scroll', () =>
+// {
+//     oldselectedIndex = selectedIndex
+//     const scrollTop = scrollPicker.scrollTop;
+//     const optionHeight = scrollPicker.querySelector('li').offsetHeight;
+//     selectedIndex = Math.round(scrollTop / optionHeight);
+//     scrollPicker.querySelectorAll('li')[selectedIndex].classList.add('selected')
+//     if (selectedIndex != oldselectedIndex)
+//         scrollPicker.querySelectorAll('li')[oldselectedIndex].classList.remove('selected')
+//     // console.log(selectedIndex, oldselectedIndex);
+//     //   selectedIndex = scrollPicker.querySelectorAll('li')[selectedIndex].textContent;
+// });
