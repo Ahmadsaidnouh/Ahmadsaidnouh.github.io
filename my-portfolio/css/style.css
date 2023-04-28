@@ -874,7 +874,7 @@ h3.my-profession {
 .contact .contact-info-item p {
     font-size: 16px;
     line-height: 25px;
-    color: var(--text-black-700);
+    color: var(--text-black-700) !important;
     font-weight: 400;
 }
 
