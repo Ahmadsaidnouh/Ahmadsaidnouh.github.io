@@ -497,7 +497,11 @@ function assignActiveStatus(index)
 function getCurrentDate()
 {
     let date = new Date();
-    let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${year}-${month/10 < 1 ? ('0'+month) : month}-${day/10 < 1 ? ('0'+day) : day}`;
+    // let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     return currentDate;
 }
 const daysCount = (date_1, date_2) =>

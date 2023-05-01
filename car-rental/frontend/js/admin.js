@@ -390,7 +390,8 @@ const date = new Date();
 let day = date.getDate();
 let month = date.getMonth() + 1;
 let year = date.getFullYear();
-let currentDate = `${year}-${month}-${day}`;
+// let currentDate = `${year}-${month}-${day}`;
+let currentDate = `${year}-${month/10 < 1 ? ('0'+month) : month}-${day/10 < 1 ? ('0'+day) : day}`;
 
 let isValidCompany = () =>
 {
