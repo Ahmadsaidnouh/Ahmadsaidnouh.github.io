@@ -54,10 +54,28 @@ function displaySection(sectionName)
 
     }
 }
+
+window.addEventListener('load', () =>
+{
+    let imgHe1 = document.querySelector(".portfolio-item-content").offsetHeight;
+    let imgHe2 = document.querySelector(".portfolio-item-inner").offsetHeight;
+    console.log("imgHe1 = ", imgHe1);
+    console.log("imgHe2 = ", imgHe2);
+    console.log(document.querySelectorAll(".portfolio .portfolio-item-content::before"));
+    let beforeHeight = `${imgHe1 - imgHe2}px`;
+    document.querySelector(".portfolio").style.setProperty('--before-height', beforeHeight)
+});
 window.addEventListener('resize', () =>
 {
     let screenWidth = window.innerWidth;
     document.querySelector(`.section.${currentSectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
+    
+    let imgHe1 = document.querySelector(".portfolio-item-content").offsetHeight;
+    let imgHe2 = document.querySelector(".portfolio-item-inner").offsetHeight;
+    console.log("imgHe1 = ", imgHe1);
+    console.log("imgHe2 = ", imgHe2);
+    let beforeHeight = `${imgHe1 - imgHe2}px`;
+    document.querySelector(".portfolio").style.setProperty('--before-height', beforeHeight)
 });
 
 function displayCopiedMessage(messageContainer)
@@ -90,37 +108,63 @@ function copyToClipboard(text, messageContainer)
 
 
 // Glow effent
-// const handleOnMouseMove = e =>
-// {
-//     const { currentTarget: target } = e;
-//     // console.log(target.previousElementSibling);
-//     // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
-//     const rect = target.getBoundingClientRect(),
-//         x = e.clientX - rect.left,
-//         y = e.clientY - rect.top;
-//     // y = e.clientY - rect.top + imageHeight;
+const handleMouseOver = e =>
+{
+    const { currentTarget: target } = e;
+    // console.log("enter", target);
+    // console.log("enter", target.querySelector(".portfolio-filter"));
+    target.querySelector(".portfolio-filter").style.opacity = 1
+    // console.log(target.previousElementSibling);
+    // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
+    // const rect = target.getBoundingClientRect(),
+    //     x = e.clientX - rect.left,
+    //     y = e.clientY - rect.top;
+    // // y = e.clientY - rect.top + imageHeight;
 
-//     // console.log(imageHeight,rect.left,rect.top,x,y);
-//     target.style.setProperty("--mouse-x", `${x}px`)
-//     target.style.setProperty("--mouse-y", `${y}px`)
-// }
+    // // console.log(imageHeight,rect.left,rect.top,x,y);
+    // target.style.setProperty("--mouse-x", `${x}px`)
+    // target.style.setProperty("--mouse-y", `${y}px`)
+}
+const handleMouseOut = e =>
+{
+    const { currentTarget: target } = e;
+    // console.log("leave", target);
+    // console.log("leave", target.querySelector(".portfolio-filter"));
+    target.querySelector(".portfolio-filter").style.opacity = 0
+    // console.log(target.previousElementSibling);
+    // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
+    // const rect = target.getBoundingClientRect(),
+    //     x = e.clientX - rect.left,
+    //     y = e.clientY - rect.top;
+    // // y = e.clientY - rect.top + imageHeight;
+
+    // // console.log(imageHeight,rect.left,rect.top,x,y);
+    // target.style.setProperty("--mouse-x", `${x}px`)
+    // target.style.setProperty("--mouse-y", `${y}px`)
+}
 
 // for (const card of document.querySelectorAll(".portfolio-item-content")) {
-//     card.onmousemove = e => handleOnMouseMove(e);
+//     card.onmouseover = e => handleMouseOver(e);
+//     card.onmouseout = e => handleMouseOut(e);
 // }
+// *********************
 const cards = document.getElementsByClassName("portfolio-item-content")
 document.getElementById("cards").onmousemove = e =>
 {
     let cX = e.clientX, cY = e.clientY;
+    let heighImg = document.querySelector(".portfolio-item-inner").offsetHeight;
+    // console.log("heighImg = ", heighImg);
     for (const card of cards) {
         const rect = card.getBoundingClientRect(),
-            x = cX - rect.left,
-            y = cY - rect.top;
+            x = cX - rect.left ,
+            y = cY - rect.top,
+            z = cY - rect.top - heighImg;
         // y = e.clientY - rect.top + imageHeight;
-
+        // console.log("z = ", z);
         // console.log(imageHeight,rect.left,rect.top,x,y);
         card.style.setProperty("--mouse-x", `${x}px`)
         card.style.setProperty("--mouse-y", `${y}px`)
+        card.style.setProperty("--mouse-yy", `${z}px`)
     }
 }
 

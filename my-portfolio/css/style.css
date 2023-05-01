@@ -125,7 +125,10 @@ ul {
     margin-right: -15px;
     position: relative;
 }
-
+.bttn {
+    position: absolute;
+    z-index: 1000;
+}
 .btn {
     font-size: 16px;
     font-weight: 500;
@@ -740,19 +743,29 @@ h3.my-profession {
     height: 100%;
     left: 0px;
     position: absolute;
-    top: 0px;
+    /* top: 0px; */
     width: 100%;
     z-index: 2;
     opacity: 0;
     transition: opacity 0.5s;
 }
+.portfolio-item-content > .portfolio-border {
+    top: 0px;
+}
 .portfolio .portfolio-item-content::before {
     background: radial-gradient(
-     600px circle at var(--mouse-x) var(--mouse-y),
+     600px circle at var(--mouse-x) var(--mouse-yy),
      rgba(255, 255, 255, 0.15),
      transparent 40%   
     );
     z-index: 3;
+}
+.portfolio .portfolio-item-content::before {
+    border-radius: 0px;
+    bottom: 0px;
+    height: var(--before-height);
+    /* height: calc(100% - 174px); */
+    /* background-color: red !important; */
 }
 .portfolio-item-content > .portfolio-border {
     background: radial-gradient(
@@ -781,9 +794,10 @@ h3.my-profession {
 .portfolio .portfolio-item-inner {
     /* border: 6px solid var(--bg-black-100);
     border-radius: 10px; */
-    /* overflow: hidden; */
+    overflow: hidden;
     cursor: pointer;
     position: relative;
+    z-index: 9999999999;
 }
 .portfolio .portfolio-item-inner .portfolio-filter {
     width: 100%;
@@ -793,6 +807,7 @@ h3.my-profession {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 999999999999999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -801,13 +816,14 @@ h3.my-profession {
     opacity: 0;
     /* overflow: hidden; */
 }
+.portfolio .portfolio-item-inner .portfolio-img {
+    transition: transform 0.2s;
+}
 .portfolio .portfolio-item-inner:hover .portfolio-filter{
     opacity: 1;
 }
-/* .portfolio .portfolio-item-inner .portfolio-filter .project-btns {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+/* .portfolio .portfolio-item-inner:hover .portfolio-img {
+    transform: scale(1.05);
 } */
 .portfolio .portfolio-item-inner .portfolio-filter .project-title {
     padding: 10px 20px !important;
