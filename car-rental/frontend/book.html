@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car rental</title>
+
+    <link rel="icon" href="./images/icon/icon.jpg">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css-icons/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- google icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Roboto:wght@700&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark main-bg">
+        <div class="container">
+            <a class="navbar-brand logo fs-1" href="index.html">Rentalcar<span class="logo-span">.com</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item pt-2">
+                        <a href="manage-booking.html" class="rounded text-center btn btn-success me-2">Manage
+                            booking</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="confirm-booking mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 pb-3">
+                    <h1>Confirm Booking</h1>
+                </div>
+                <div class="col-12 my-5">
+                    <div
+                        class="search-info p-3 rounded d-flex justify-content-between align-items-center flex-lg-row flex-column flex-wrap">
+                        <div class="d-flex align-items-center">
+                            <div id="pickUpHeader" class="border p-2 rounded">
+                                <h4>Dubai</h4>
+                                <p class="text-muted mb-0">12-11-2022 @11:59AM</p>
+                            </div>
+                            <span class="mx-4 material-symbols-outlined">
+                                arrow_forward_ios
+                            </span>
+                            <div id="dropOffHeader" class="border p-2 rounded">
+                                <h4>Dubai</h4>
+                                <p class="text-muted mb-0">12-11-2022 @11:59PM</p>
+                            </div>
+                        </div>
+                        <button id="editBtn" class="btn btn-success rounded mt-3 mt-lg-0">Edit</butt>
+                        <!-- <a href="index.html" id="editBtn" class="btn btn-success rounded mt-3 mt-lg-0">Edit</a> -->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div id="carContainer" class="car border p-3 rounded mb-3">
+                        <!-- car data here -->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div id="signInContainer" class="confirm-info border rounded p-3  mb-4 d-block">
+                        <div id="form" class="row">
+                            <div class="col-12 px-0 mb-2">
+                                <div id="email"
+                                    class="pe-2 d-flex flex-column align-items-start rounded bg-white py-3 ps-2">
+                                    <label for="emailInput" class="fw-bold fs-5 mb-2">Email:</label>
+                                    <input class="w-100  rounded border p-2" type="email" name="" id="emailInput"
+                                        placeholder="...">
+                                    <div id="emailAlert" class="d-none mt-1 alert alert-danger p-2">Invalid email format
+                                        (example@domain.xxx)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 px-0 mb-2">
+                                <div id="password"
+                                    class="pe-2 d-flex flex-column align-items-start rounded bg-white py-3 ps-2">
+                                    <label for="passwordInput" class="fw-bold fs-5 mb-2">Password:</label>
+                                    <input class="w-100 rounded border p-2" type="password" name="" id="passwordInput"
+                                        placeholder="...">
+                                    <div id="passwordAlert" class="d-none mt-1 alert alert-danger p-2">Required &
+                                        min-lenght 3
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="signInBtnContainer" class="col-12 px-0 mb-2 d-block">
+                                <div class="w-25 mx-auto text-center">
+                                    <button id="signInBtn" class="btn btn-primary w-100 mx-auto rounded">Book now</button>
+                                </div>
+                            </div>
+                            <div id="signUpBtnContainer" class="col-12 text-center px-0 mt-4 d-block">
+                                <p>Don't have an account? <a href="signUp.html" id="signUpBtn"
+                                        class="fw-bold cursor-pointer">Sign-up</a></p>
+                            </div>
+                            <div id="successMessage" class="col-12 text-center px-0 mt-4 d-none">
+                                <p class="text-success">Car booked successfully<br>
+                                    Reservation can be found in Manage booking<br>
+                                    <a href="index.html" class="btn btn-primary border rounded me-2 mt-2">Home</a>
+                                    <a href="manage-booking.html" class="btn btn-primary border rounded mt-2">Manage
+                                        booking</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="notAvailableMessage" class="border rounded p-3  mb-4 d-none alert-danger">
+                        <h2>This car is not available at the specified time or pick-up location.</h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="features pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_calendar@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Flexible rentals</h4>
+                        <p class="mb-0 fs-6">Cancel or change most bookings for free up to 48 hours before pick-up</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_magnifier@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">No hidden fees</h4>
+                        <p class="mb-0 fs-6">Know exactly what you’re paying</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_wallet@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Price Match Guarantee</h4>
+                        <p class="mb-0 fs-6">Found the same deal for less? We’ll match the price.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container py-4">
+            <p class="text-center">Copyright © 2022 Booking.com Transport Limited trading as Rentalcars.com. All rights
+                reserved</p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/book.script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+</body>
+
+</html>

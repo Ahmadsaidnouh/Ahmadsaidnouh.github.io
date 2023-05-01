@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car rental</title>
+
+    <link rel="icon" href="./images/icon/icon.jpg">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css-icons/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Roboto:wght@700&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark main-bg">
+        <div class="container">
+            <a class="navbar-brand logo fs-1" href="index.html">Rentalcar<span class="logo-span">.com</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item pt-2">
+                        <a href="manage-booking.html" class="rounded text-center btn btn-success me-2">Manage
+                            booking</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="main pb-4">
+        <div class="main-gradient">
+            <div class="container pt-4">
+                <div class="row">
+                    <div class="col-12 pb-3">
+                        <h1>Car Rental – Search, Compare & Save</h1>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-lg-row flex-column">
+                            <div class="me-4 d-flex">
+                                <span class="me-2"><i class="fas fa-check "></i></span>
+                                <p>Free cancellations on most bookings</p>
+                            </div>
+                            <div class="me-4 d-flex">
+                                <span class="me-2"><i class="fas fa-check "></i></span>
+                                <p>60,000+ locations</p>
+                            </div>
+                            <div class="d-flex">
+                                <span class="me-2"><i class="fas fa-check "></i></span>
+                                <p>Customer support in 40+ languages</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div id="searchSection" class="py-2 container rounded">
+                            <div class="row">
+                                <div class="col-12 col-lg-6 ps-0 pe-0 pe-lg-3">
+                                    <div class="row">
+                                        <div class="col-12 col-lg mb-2 mb-lg-0">
+                                            <div id="pickupLocation"
+                                                class="d-flex align-items-center rounded bg-white py-3 ps-2 dflex ">
+                                                <span class="material-symbols-outlined">search</span>
+                                                <input class="ms-1 w-100" type="text" name="" id="pickupInput"
+                                                    placeholder="Pick-up location (location-city-country)">
+                                            </div>
+                                        </div>
+                                        <div id="dropOffSection" class="col-12 col-lg mb-2 mb-lg-0 d-none">
+                                            <div id="dropoffLocation"
+                                                class="d-flex align-items-center rounded bg-white py-3 ps-2 dflex ">
+                                                <span class="material-symbols-outlined">search</span>
+                                                <input class="ms-1 w-100" type="text" name="" id="dropoffInput"
+                                                    placeholder="Drop-off location">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 pe-0 ps-0 ps-lg-2">
+                                    <div class="row">
+                                        <div class="col-12 col-lg mb-2 mb-lg-0 position-relative">
+                                            <div id="pickUpDate"
+                                                class="d-flex align-items-center rounded bg-white py-3 ps-2">
+                                                <input class="ms-1" type="date" name="" id="pickUpDateInput">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg mb-2 mb-lg-0 position-relative">
+                                            <div id="dropOffDate"
+                                                class="d-flex align-items-center rounded bg-white py-3 ps-2">
+                                                <input class="ms-1" type="date" name="" id="dropoffDateInput">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-2">
+                                            <button id="searchBtn"
+                                                class="rounded px-0 btn btn-success w-100 h-100 text-center">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 align-items-center">
+                        <div></div>
+                        <div class="d-flex">
+                            <div class="main-bg rounded p-2 d-flex align-items-center">
+                                <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="dropoffCheckbox">
+                                <label for="dropoffCheckbox" class="cursor-pointer mb-0">Drop car off at different
+                                    location</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="features pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_calendar@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Flexible rentals</h4>
+                        <p class="mb-0 fs-6">Cancel or change most bookings for free up to 48 hours before pick-up</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_magnifier@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">No hidden fees</h4>
+                        <p class="mb-0 fs-6">Know exactly what you’re paying</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_wallet@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Price Match Guarantee</h4>
+                        <p class="mb-0 fs-6">Found the same deal for less? We’ll match the price.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container py-4">
+            <p class="text-center">Copyright © 2022 Booking.com Transport Limited trading as Rentalcars.com. All rights
+                reserved</p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/index.script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car rental</title>
+
+    <link rel="icon" href="./images/icon/icon.jpg">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css-icons/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Roboto:wght@700&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark main-bg">
+        <div class="container">
+            <a class="navbar-brand logo fs-1" href="index.html">Rentalcar<span class="logo-span">.com</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item pt-2">
+                        <a href="index.html" class="w-25 text-center btn btn-success rounded">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="main pb-4">
+        <div class="main-gradient">
+            <div class="container pt-4">
+                <div class="row">
+                    <div class="col-12 pb-3 text-center">
+                        <h1>Sign In</h1>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div id="signInSection" class="py-2 container rounded bg-light w-50">
+                            <div class="row">
+                                <div class="col-12 px-0 mb-2">
+                                    <div class="form-floating m-3">
+                                        <input type="email" class="form-control" id="emailAdmin"
+                                            placeholder="name@example.com">
+                                        <label for="emailInput">Email address</label>
+                                    </div>
+                                    <div class="form-floating m-3">
+                                        <input type="password" class="form-control" id="passwordAdmin"
+                                            placeholder="Password">
+                                        <label for="passwordInput">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 px-0 mb-2">
+                                <div id="signUpBtnContainer" class="w-25 mx-auto text-center">
+                                    <button id="signInBtn" disabled class="btn btn-primary w-100 mx-auto rounded">sign
+                                        in</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_calendar@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Flexible rentals</h4>
+                        <p class="mb-0 fs-6">Cancel or change most bookings for free up to 48 hours before pick-up</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_magnifier@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">No hidden fees</h4>
+                        <p class="mb-0 fs-6">Know exactly what you’re paying</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_wallet@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Price Match Guarantee</h4>
+                        <p class="mb-0 fs-6">Found the same deal for less? We’ll match the price.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container py-4">
+            <p class="text-center">Copyright © 2022 Booking.com Transport Limited trading as Rentalcars.com. All rights
+                reserved</p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/signin_admin.js"></script>
+</body>
+
+</html>

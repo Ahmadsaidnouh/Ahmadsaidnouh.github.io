@@ -1,0 +1,195 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.main-bg {
+    background-color: #1879ca;
+}
+.rounded {
+    border-radius: 10px !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.btn {
+    box-shadow: none !important;
+}
+a {
+    text-decoration: none;
+}
+
+
+.alert {
+    border-left: solid 0 !important;
+    border-right: solid 0 !important;
+    border-top: solid 0 !important;
+    border-radius: 0 !important;
+    width: 100%;
+    background-color: transparent;
+    color: red;
+    border-color: red;
+    padding-left: 0px !important;
+}
+
+/* navbar */
+nav {
+    color: white;   
+}
+nav .btn {
+    min-width: 82px !important;
+    background-color: white !important;
+    color: #1273c4 !important;
+    border: solid 0px !important;
+}
+nav .btn:hover, .main-btn:hover {
+    background-color: rgb(243, 241, 241) !important;
+
+}
+.logo {
+    color: white;
+    font-size: larger;
+    font-weight: 700;
+    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.logo-span {
+    font-size: 20px;
+}
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0rem;
+}
+/* navbar end */
+
+/* main start */
+.main {
+    background-image: url(../images/background-large.jpg);
+    background-position: center;
+    background-size: cover;
+    min-height: 290px;
+    color: white;
+}
+.main-gradient {
+    background: linear-gradient(#1879ca,transparent);
+    min-height: 290px;
+}
+/* main end */
+
+/* search section start*/
+#searchSection, #signInSection {
+    background-color: #ffb700;
+    color: black;
+}
+input {
+    border: solid 0px;
+    border: none;
+    outline: none;
+}
+
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+}
+/* search section end*/
+
+/* footer start */
+.footer, .features {
+    background-color: #f5f5f5;
+}
+/* footer end */
+
+/* search info */
+.search-info {
+
+    border: solid 2px #ffb700;
+}
+.price-day {
+    font-size: 13px;
+}
+
+@media screen and (max-width: 992px) {
+    .price-container {
+        margin-top: 8px;
+        align-items: flex-start !important;
+    }
+
+    #filterBig {
+        display: none !important;
+    }
+}
+@media screen and (min-width: 992px) {
+    #filterSmall {
+        display: none !important;
+    }
+}
+/* search info */
+
+/* returnPopup */
+#popup {
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.315);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* returnPopup */
+
+
+/* pickUpDate */
+#pickUpDate:before {
+    content: "Pick-up date";
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    left: 24px;
+}
+#dropOffDate:before {
+    content: "Drop-off date";
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    left: 24px;
+}
+/* pickUpDate */
+
+
+/* book */
+#signUpBtn:hover {
+    text-decoration: underline;
+}
+/* book */
+
+/* closeReturnPopup */
+#closePopupBtn {
+    width: auto;
+    right: 16px;
+    top: 16px;
+}
+#closePopupBtn:hover {
+    color: red;
+}
+/* closeReturnPopup */
+
+/* statusContainer */
+#statusContainer div{
+    border-radius: 36px !important;
+}
+
+.active-status {
+    background-color: #c8f8f9;
+}
+#statusContainer li {
+    border-radius: 40px !important;
+}
+#statusContainer li:hover {
+    background-color: #c8f8f9;
+}
+/* statusContainer */

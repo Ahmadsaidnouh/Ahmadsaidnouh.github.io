@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car rental</title>
+
+    <link rel="icon" href="./images/icon/icon.jpg">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css-icons/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&family=Roboto:wght@700&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark main-bg">
+        <div class="container">
+            <a class="navbar-brand logo fs-1" href="index.html">Rentalcar<span class="logo-span">.com</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item pt-2">
+                        <a href="manage-booking.html" class="rounded text-center btn btn-success me-2">Manage booking</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="results">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 my-5">
+                    <div class="search-info p-3 rounded d-flex justify-content-between align-items-center flex-lg-row flex-column flex-wrap">
+                        <div class="d-flex align-items-center">
+                            <div id="pickUpHeader" class="border p-2 rounded">
+                                <h4>Dubai</h4>               
+                                <p class="text-muted mb-0">12-11-2022  @11:59AM</p>
+                            </div>
+                            <span class="mx-4 material-symbols-outlined">
+                                arrow_forward_ios
+                                </span>
+                            <div id="dropOffHeader" class="border p-2 rounded">
+                                <h4>Dubai</h4>               
+                                <p class="text-muted mb-0">12-11-2022 @11:59PM</p>
+                            </div>
+                        </div>
+                        <button id="editBtn" class="btn btn-success rounded mt-3 mt-lg-0">Edit</button>
+                    </div>
+                </div>
+                <div class="col-12 mb-5">
+                    <div class="row">
+                        <div id="filterBig" class="col-4 d-block">
+                            <div class="filter-big p-3 rounded border d-flex flex-column">
+                                <div class="border-bottom d-flex pb-3 mb-3 justify-content-between align-items-center">
+                                    <h3>Filter</h3>
+                                    <button id="clearFilterBtn1" class="btn btn-primary rounded">Clear all filters</button>
+                                </div>                               
+                                <div class="border-bottom d-flex flex-column pb-3 mb-3">
+                                    <h3>Transmission</h3>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="automaticCheckbox1">
+                                        <label for="automaticCheckbox1" class="cursor-pointer mb-0">Automatic</label>
+                                    </div>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="manualCheckbox1">
+                                        <label for="manualCheckbox1" class="cursor-pointer mb-0">Manual</label>
+                                    </div>
+                                </div>                               
+                                <div class="d-flex flex-column pb-3">
+                                    <h3>Car category</h3>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="smallCheckbox1">
+                                        <label for="smallCheckbox1" class="cursor-pointer mb-0">Small</label>
+                                    </div>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="mediumCheckbox1">
+                                        <label for="mediumCheckbox1" class="cursor-pointer mb-0">Medium</label>
+                                    </div>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="largeCheckbox1">
+                                        <label for="largeCheckbox1" class="cursor-pointer mb-0">Large</label>
+                                    </div>
+                                    <div class="p-2 ps-0 d-flex align-items-center">
+                                        <input class="cursor-pointer rounded me-2" type="checkbox" name="" id="premiumCheckbox1">
+                                        <label for="premiumCheckbox1" class="cursor-pointer mb-0">Premium</label>
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 id="searchResult" class="fw-bold mb-4"></h3>
+                                </div>
+                                <div id="filterSmall" class="col-12 d-block">
+                                    <p>
+                                        <div class="d-flex rounded justify-content-center btn btn-primary w-100" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            <span class="material-symbols-outlined">tune</span>
+                                            Filter
+                                        </div>
+                                    </p>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="border-bottom d-flex pb-3 mb-2 justify-content-between align-items-center">
+                                            <h3>Filter</h3>
+                                            <button id="clearFilterBtnS" class="btn btn-primary rounded">Clear all filters</button>
+                                        </div> 
+                                        <div class="border-bottom d-flex flex-column pb-2 mb-2">
+                                            <h3>Transmission</h3>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="automaticCheckboxS">
+                                                <label for="automaticCheckboxS" class="cursor-pointer mb-0">Automatic</label>
+                                            </div>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="manualCheckboxS">
+                                                <label for="manualCheckboxS" class="cursor-pointer mb-0">Manual</label>
+                                            </div>
+                                        </div>                               
+                                        <div class="d-flex flex-column pb-2">
+                                            <h3>Car category</h3>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="smallCheckboxS">
+                                                <label for="smallCheckboxS" class="cursor-pointer mb-0">Small</label>
+                                            </div>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="mediumCheckboxS">
+                                                <label for="mediumCheckboxS" class="cursor-pointer mb-0">Medium</label>
+                                            </div>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="largeCheckboxS">
+                                                <label for="largeCheckboxS" class="cursor-pointer mb-0">Large</label>
+                                            </div>
+                                            <div class="p-1 ps-0 d-flex align-items-center">
+                                                <input class="cursor-pointer rounded me-1" type="checkbox" name="" id="premiumCheckboxS">
+                                                <label for="premiumCheckboxS" class="cursor-pointer mb-0">Premium</label>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div id="carsContainer" class="row">
+                                        <!-- cars here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_calendar@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Flexible rentals</h4>
+                        <p class="mb-0 fs-6">Cancel or change most bookings for free up to 48 hours before pick-up</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_magnifier@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">No hidden fees</h4>
+                        <p class="mb-0 fs-6">Know exactly what you’re paying</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 d-flex flex-row align-items-top mb-4">
+                    <div>
+                        <img class="me-2" src="./images/features/usp_wallet@1x.png" alt="calender">
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fs-5 fw-bold">Price Match Guarantee</h4>
+                        <p class="mb-0 fs-6">Found the same deal for less? We’ll match the price.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container py-4">
+            <p class="text-center">Copyright © 2022 Booking.com Transport Limited trading as Rentalcars.com. All rights reserved</p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+</body>
+
+</html>
