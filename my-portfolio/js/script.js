@@ -69,7 +69,7 @@ window.addEventListener('resize', () =>
 {
     let screenWidth = window.innerWidth;
     document.querySelector(`.section.${currentSectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
-    
+
     let imgHe1 = document.querySelector(".portfolio-item-content").offsetHeight;
     let imgHe2 = document.querySelector(".portfolio-item-inner").offsetHeight;
     console.log("imgHe1 = ", imgHe1);
@@ -156,7 +156,7 @@ document.getElementById("cards").onmousemove = e =>
     // console.log("heighImg = ", heighImg);
     for (const card of cards) {
         const rect = card.getBoundingClientRect(),
-            x = cX - rect.left ,
+            x = cX - rect.left,
             y = cY - rect.top,
             z = cY - rect.top - heighImg;
         // y = e.clientY - rect.top + imageHeight;
