@@ -184,3 +184,4 @@ document.getElementById("cards").onmousemove = e =>
 //     // console.log(selectedIndex, oldselectedIndex);
 //     //   selectedIndex = scrollPicker.querySelectorAll('li')[selectedIndex].textContent;
 // });
+displaySection("portfolio")
