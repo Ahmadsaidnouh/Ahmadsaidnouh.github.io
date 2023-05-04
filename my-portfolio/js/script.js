@@ -134,5 +134,3 @@ document.getElementById("cards").onmousemove = e =>
         card.style.setProperty("--mouse-yy", `${z}px`)
     }
 }
-
-displaySection("portfolio")
