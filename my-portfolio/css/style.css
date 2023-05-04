@@ -24,7 +24,7 @@ body {
     padding: 0;
     line-height: 1.5;
     font-size: 16px;
-    font-family: 'Poppins' sans-serif;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 * {
@@ -33,6 +33,7 @@ body {
     outline: none;
     text-decoration: none;
     box-sizing: border-box;
+    /* font-family: 'Poppins', sans-serif !important; */
 }
 
 ::before,
@@ -519,6 +520,7 @@ h3.my-profession {
 
 .about .about-content .personal-info .info-item p span,
 .about .about-content .personal-info .info-item p a {
+    font-size: 15px;
     font-weight: 400;
     color: var(--text-black-700);
     margin-left: 4px;
@@ -755,12 +757,16 @@ h3.my-profession {
 .red {
     background-color: red !important;
 }
+.portfolio #cards {
+    align-items: stretch;
+}
 .portfolio .portfolio-item-content {
     background-color: var(--bg-black-100);
     /* border: 3px solid var(--bg-black-100); */
     border-radius: 10px;
     overflow: hidden;
     position: relative;
+    height: 100%;
 }
 .portfolio .portfolio-item-content::before,
 .portfolio-item-content > .portfolio-border {
@@ -885,7 +891,15 @@ h3.my-profession {
 .portfolio .portfolio-details span {
     color: var(--text-black-600);
 }
-
+.portfolio-details span {
+    position: absolute;
+    bottom: 5px;
+}
+.portfolio-details p {
+    margin-bottom: 28px !important;
+    /* position: absolute;
+    bottom: 5px; */
+}
 /* contact */
 .contact-title {
     color: var(--skin-color);
@@ -1047,50 +1061,3 @@ h3.my-profession {
         max-width: 100%;
     }
 }
-
-
-
-
-
-
-
-
-
-.scroll-picker {
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-    background-color: #222;
-    color: #e8dfec;
-  }
-  
-  .scroll-picker ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    text-align: center;
-  }
-  
-  .scroll-picker li {
-    margin: 5px 20px;
-    border-radius: 5px;
-    background-color: #9c9c9c;
-    height: 50px;
-    line-height: 50px;
-    font-size: 1.2em;
-    color: #e8dfec;
-    transform: all 0.2s ease;
-  }
-  .scroll-picker li.selected {
-    margin: 5px;
-    background-color: #585858;
-  }
-  
