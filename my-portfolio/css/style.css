@@ -381,6 +381,14 @@ ul {
 .copying-container .message-tip i{
     margin-right: 5px;
 }
+
+.nav-link {
+    display: flex;
+    flex: row;
+}
+.nav-link i {
+    width: 20px;
+}
 /* home */
 .home {
     min-height: 100vh;
