@@ -7,6 +7,7 @@
     --text-black-900: #302e4d;
     --text-black-700: #504e70;
     --text-black-600: #9c9c9c;
+    --text-black-500: #444343;
     --scroll-bg: 190, 190, 190
 }
 body.dark {
@@ -16,6 +17,7 @@ body.dark {
     --text-black-900: #fff;
     --text-black-700: #e9e9e9;
     --text-black-600: #9c9c9c;
+    --text-black-500: #c9c7c7;
     --scroll-bg: 95, 95, 95
 }
 
@@ -885,20 +887,14 @@ h3.my-profession {
 }
 .portfolio .portfolio-details p {
     font-size: 14px;
-    margin-bottom: 4px;
-    color: var(--text-black-600);
+    margin-bottom: 28px;
+    color: var(--text-black-500);
 }
 .portfolio .portfolio-details span {
+    font-size: 14px;
     color: var(--text-black-600);
-}
-.portfolio-details span {
     position: absolute;
     bottom: 5px;
-}
-.portfolio-details p {
-    margin-bottom: 28px !important;
-    /* position: absolute;
-    bottom: 5px; */
 }
 /* contact */
 .contact-title {
