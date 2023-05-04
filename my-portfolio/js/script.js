@@ -4,7 +4,7 @@
 
 "use strict"
 var typed = new Typed('.typing', {
-    strings: ["Software Engineer", "Frontend Developer", "Backend Developer", "Web Developer"],
+    strings: ["Software Engineer", "Frontend Developer", "Backend Developer", "Full Stack Web Developer"],
     typeSpeed: 100,
     backSpeed: 60,
     loop: true
@@ -30,7 +30,6 @@ const contact = document.querySelector(".contact")
 let currentSectionName = 'home'
 function displaySection(sectionName)
 {
-    console.log(sectionName);
     navLinks.forEach((nav) =>
     {
         nav.classList.remove("active")
@@ -42,7 +41,6 @@ function displaySection(sectionName)
     }
     if (currentSectionName != sectionName) {
         let screenWidth = window.innerWidth;
-        // console.log(currentSectionName, sectionName, `.section.${sectionName}`);
         document.querySelector(`.section.${currentSectionName}`).style.zIndex = "0"
         document.querySelector(`.section.${sectionName}`).style.zIndex = "1"
         document.querySelector(`.section.${sectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
@@ -57,25 +55,26 @@ function displaySection(sectionName)
 
 window.addEventListener('load', () =>
 {
-    let imgHe1 = document.querySelector(".portfolio-item-content").offsetHeight;
-    let imgHe2 = document.querySelector(".portfolio-item-inner").offsetHeight;
-    console.log("imgHe1 = ", imgHe1);
-    console.log("imgHe2 = ", imgHe2);
-    console.log(document.querySelectorAll(".portfolio .portfolio-item-content::before"));
-    let beforeHeight = `${imgHe1 - imgHe2}px`;
-    document.querySelector(".portfolio").style.setProperty('--before-height', beforeHeight)
+    let cards = document.querySelectorAll(".portfolio-item");
+    for (const card of cards) {
+        let imgHe1 = card.querySelector(".portfolio-item-content").offsetHeight;
+        let imgHe2 = card.querySelector(".portfolio-item-inner").offsetHeight;
+        let beforeHeight = `${imgHe1 - imgHe2 - 2}px`;
+        card.style.setProperty('--before-height', beforeHeight)
+    }
 });
 window.addEventListener('resize', () =>
 {
     let screenWidth = window.innerWidth;
     document.querySelector(`.section.${currentSectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
 
-    let imgHe1 = document.querySelector(".portfolio-item-content").offsetHeight;
-    let imgHe2 = document.querySelector(".portfolio-item-inner").offsetHeight;
-    console.log("imgHe1 = ", imgHe1);
-    console.log("imgHe2 = ", imgHe2);
-    let beforeHeight = `${imgHe1 - imgHe2}px`;
-    document.querySelector(".portfolio").style.setProperty('--before-height', beforeHeight)
+    let cards = document.querySelectorAll(".portfolio-item");
+    for (const card of cards) {
+        let imgHe1 = card.querySelector(".portfolio-item-content").offsetHeight;
+        let imgHe2 = card.querySelector(".portfolio-item-inner").offsetHeight;
+        let beforeHeight = `${imgHe1 - imgHe2 - 2}px`;
+        card.style.setProperty('--before-height', beforeHeight)
+    }
 });
 
 function displayCopiedMessage(messageContainer)
@@ -111,77 +110,29 @@ function copyToClipboard(text, messageContainer)
 const handleMouseOver = e =>
 {
     const { currentTarget: target } = e;
-    // console.log("enter", target);
-    // console.log("enter", target.querySelector(".portfolio-filter"));
     target.querySelector(".portfolio-filter").style.opacity = 1
-    // console.log(target.previousElementSibling);
-    // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
-    // const rect = target.getBoundingClientRect(),
-    //     x = e.clientX - rect.left,
-    //     y = e.clientY - rect.top;
-    // // y = e.clientY - rect.top + imageHeight;
-
-    // // console.log(imageHeight,rect.left,rect.top,x,y);
-    // target.style.setProperty("--mouse-x", `${x}px`)
-    // target.style.setProperty("--mouse-y", `${y}px`)
 }
 const handleMouseOut = e =>
 {
     const { currentTarget: target } = e;
-    // console.log("leave", target);
-    // console.log("leave", target.querySelector(".portfolio-filter"));
     target.querySelector(".portfolio-filter").style.opacity = 0
-    // console.log(target.previousElementSibling);
-    // const imageHeight = target.previousElementSibling ? target.previousElementSibling.clientHeight : 0;
-    // const rect = target.getBoundingClientRect(),
-    //     x = e.clientX - rect.left,
-    //     y = e.clientY - rect.top;
-    // // y = e.clientY - rect.top + imageHeight;
-
-    // // console.log(imageHeight,rect.left,rect.top,x,y);
-    // target.style.setProperty("--mouse-x", `${x}px`)
-    // target.style.setProperty("--mouse-y", `${y}px`)
 }
 
-// for (const card of document.querySelectorAll(".portfolio-item-content")) {
-//     card.onmouseover = e => handleMouseOver(e);
-//     card.onmouseout = e => handleMouseOut(e);
-// }
 // *********************
 const cards = document.getElementsByClassName("portfolio-item-content")
 document.getElementById("cards").onmousemove = e =>
 {
     let cX = e.clientX, cY = e.clientY;
     let heighImg = document.querySelector(".portfolio-item-inner").offsetHeight;
-    // console.log("heighImg = ", heighImg);
     for (const card of cards) {
         const rect = card.getBoundingClientRect(),
             x = cX - rect.left,
             y = cY - rect.top,
             z = cY - rect.top - heighImg;
-        // y = e.clientY - rect.top + imageHeight;
-        // console.log("z = ", z);
-        // console.log(imageHeight,rect.left,rect.top,x,y);
         card.style.setProperty("--mouse-x", `${x}px`)
         card.style.setProperty("--mouse-y", `${y}px`)
         card.style.setProperty("--mouse-yy", `${z}px`)
     }
 }
 
-// const scrollPicker = document.querySelector('.scroll-picker ul');
-// let selectedIndex = 1;
-// let oldselectedIndex = 1;
-
-// scrollPicker.addEventListener('scroll', () =>
-// {
-//     oldselectedIndex = selectedIndex
-//     const scrollTop = scrollPicker.scrollTop;
-//     const optionHeight = scrollPicker.querySelector('li').offsetHeight;
-//     selectedIndex = Math.round(scrollTop / optionHeight);
-//     scrollPicker.querySelectorAll('li')[selectedIndex].classList.add('selected')
-//     if (selectedIndex != oldselectedIndex)
-//         scrollPicker.querySelectorAll('li')[oldselectedIndex].classList.remove('selected')
-//     // console.log(selectedIndex, oldselectedIndex);
-//     //   selectedIndex = scrollPicker.querySelectorAll('li')[selectedIndex].textContent;
-// });
-// displaySection("portfolio")
+displaySection("portfolio")

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- link bootstrap.css -->
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+
+    <!-- link font awsome -->
+    <link rel="stylesheet" href="./css-icons/all.min.css">
+    
+    <!-- link google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+
+    <!-- link my style.css -->
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+
+
+    <!-- start header -->
+    <header id="home" class="w-100 vh-100 position-relative">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top pop-text ">
+            <div class="container h-100">
+                <a class="navbar-brand h-80" href="#">
+                    <img src="./imgs/logo-dark.png" class="w-75" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-2 bg-white">
+                        <li class="nav-item px-1">
+                            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#team" tabindex="-1" aria-disabled="true">Team</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#services" tabindex="-1" aria-disabled="true">Services</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Works</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#prices" tabindex="-1" aria-disabled="true">Pricing</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link" href="#contact" tabindex="-1" aria-disabled="true">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="nav-icons d-flex justify-content-center align-items-center ps-3">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner w-100 h-100">
+                <div class="carousel-item active w-100 h-100">
+                    <div class="container-fluid item-1 w-100 h-100 p-0">
+                        <div class="header-car-content">
+                            <h1 class="pop-text">Get Awesome.</h1>
+                            <h4 class="pop-text">We are an innovative company making digital stuff.</h4>
+                            <div class="header-car-content-btns pop-text">
+                                <button class="car-content-btn-left">Read More</button>
+                                <button class="car-content-btn-right">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item w-100 h-100">
+                    <div class="container-fluid item-2 w-100 h-100 p-0">
+                        <div class="header-car-content">
+                            <h1 class="pop-text">Create With Bezel.</h1>
+                            <h4 class="pop-text">We help ambitious companies create new value.</h4>
+                            <div class="header-car-content-btns pop-text">
+                                <button class="car-content-btn-left">Hire Us</button>
+                                <button class="car-content-btn-right">Services</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators position-absolute bottom-0">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            </div>
+            <button class="carousel-control-prev header-car-btns header-car-left" type="button"
+                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <i class="fas fa-arrow-left"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next header-car-btns header-car-right" type="button"
+                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <i class="fas fa-arrow-right"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </header>
+    <!-- end header -->
+
+
+    <!-- start about -->
+    <section id="about" class="about">
+        <div class="container-fluid ">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
+                    <h6>WHO WE ARE</h6>
+                    <p class="sans-text">We are an innovative company. We develop and design <span
+                            class="position-relative sans-text fw-bold"></span> for
+                        costumers around the world. Our clients are some of the most forward-looking companies in the
+                        world.</p>
+                    <a href="">READ MORE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end about -->
+
+    <!-- start team -->
+    <section id="team" class="team">
+        <h2 class="pop-text">Creative Team</h2>
+        <h4 class="sans-text">We are digital thinkers</h4>
+        <div class="container pt-5 pop-text">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 pb-5 pb-lg-0">
+                    <div class="team-box position-relative">
+                        <img src="./imgs/team-1.jpg" class="w-100" alt="">
+                        <div class="team-filter">
+                            <div class="team-filter-icons text-start">
+                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="team-filter-text text-start">
+                                <h4>LUKE CAGE</h4>
+                                <span>FOUNDER & CEO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 pb-5 pb-lg-0">
+                    <div class="team-box position-relative">
+                        <img src="./imgs/team-2.jpg" class="w-100" alt="">
+                        <div class="team-filter">
+                            <div class="team-filter-icons text-start">
+                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="team-filter-text text-start">
+                                <h4>JESSICA JONES</h4>
+                                <span>PRODUCT DESIGNER</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 pb-5 pb-lg-0">
+                    <div class="team-box position-relative">
+                        <img src="./imgs/team-3.jpg" class="w-100" alt="">
+                        <div class="team-filter">
+                            <div class="team-filter-icons text-start">
+                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="team-filter-text text-start">
+                                <h4>MATT MURDOCK</h4>
+                                <span>LEAD DEVELOPER</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 pb-5 pb-lg-0">
+                    <div class="team-box position-relative">
+                        <img src="./imgs/team-4.jpg" class="w-100" alt="">
+                        <div class="team-filter">
+                            <div class="team-filter-icons text-start">
+                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="team-filter-text text-start">
+                                <h4>CLAIRE TEMPLE</h4>
+                                <span>SALES MANAGER</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end team -->
+
+
+    <!-- start services -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text">STUNNING DESIGN</h4>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text">TIME SAVER</h4>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text">CLEAN CODE</h4>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text">CUSTOMIZABLE</h4>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text">PERFECT LAYOUT</h4>
+                </div>
+                <div class="col-lg-2 col-md-4 d-flex justify-content-center align-items-center my-4">
+                    <h4 class="upper pop-text"> RETINA READY</h4>
+                </div>
+            </div>
+            <div class="row pt-lg-4 pt-5">
+                <div class="col-lg-4 text-start">
+                    <h2 class="pop-text">What We Do.</h2>
+                    <p class="sans-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam ipsam ullam
+                        incidunt itaque
+                        nemo omnis temporibus totam quibusdam repellat vero, recusandae excepturi dignissimos velit et
+                        alias amet, quia facilis perferendis.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 offset-lg-2 offset-0">
+                    <ul class="sans-text">
+                        <li><i class="far fa-check-circle me-2"></i> Research</li>
+                        <li><i class="far fa-check-circle me-2"></i> Opportunity Analysis</li>
+                        <li><i class="far fa-check-circle me-2"></i> Consulting</li>
+                        <li><i class="far fa-check-circle me-2"></i> Brand Planning</li>
+                        <li><i class="far fa-check-circle me-2"></i> Customer Support</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <ul class="sans-text">
+                        <li><i class="far fa-check-circle me-2"></i> Logo & Branding</li>
+                        <li><i class="far fa-check-circle me-2"></i> Style guides</li>
+                        <li><i class="far fa-check-circle me-2"></i> Motion graphics</li>
+                        <li><i class="far fa-check-circle me-2"></i> UX/UI-design</li>
+                        <li><i class="far fa-check-circle me-2"></i> Social media design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end services -->
+
+
+    <!-- start prices -->
+    <section id="prices" class="prices">
+        <h2 class="pop-text">Cheap Prices</h2>
+        <h4 class="sans-text">We provide the best quality.</h4>
+        <div class="container pt-5 pop-text">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="prices-box">
+                        <h4 class="pop-text">Starter</h4>
+                        <div class="prc sans-text py-3 text-start">
+                            <h3><span>$</span>9</h3>
+                        </div>
+                        <ul class="pt-3">
+                            <li>Unlimited Connections</li>
+                            <li>24/7 Support</li>
+                            <li>Full SSL Protection</li>
+                            <li>Unlimited Channels</li>
+                        </ul>
+                        <a href="">Sign Up</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="prices-box">
+                        <h4 class="pop-text">Silver</h4>
+                        <div class="prc sans-text py-3 text-start">
+                            <h3><span>$</span>19</h3>
+                        </div>
+                        <ul class="pt-3">
+                            <li>Unlimited Connections</li>
+                            <li>24/7 Support</li>
+                            <li>Full SSL Protection</li>
+                            <li>Unlimited Channels</li>
+                        </ul>
+                        <a href="">Sign Up</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="prices-box best-prc">
+                        <h4 class="pop-text d-flex justify-content-between align-items-center w-100">Gold <span>BEST
+                                VALUE</span></h4>
+                        <div class="prc sans-text py-3 text-start">
+                            <h3><span>$</span>29</h3>
+                        </div>
+                        <ul class="pt-3">
+                            <li>Unlimited Connections</li>
+                            <li>24/7 Support</li>
+                            <li>Full SSL Protection</li>
+                            <li>Unlimited Channels</li>
+                        </ul>
+                        <a href="">Sign Up</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="prices-box">
+                        <h4 class="pop-text">Platinum</h4>
+                        <div class="prc sans-text py-3 text-start">
+                            <h3><span>$</span>49</h3>
+                        </div>
+                        <ul class="pt-3">
+                            <li>Unlimited Connections</li>
+                            <li>24/7 Support</li>
+                            <li>Full SSL Protection</li>
+                            <li>Unlimited Channels</li>
+                        </ul>
+                        <a href="">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end prices -->
+
+
+    <!-- start slider -->
+    <section id="slider" class="slider">
+        <div class="container">
+            <h6 class="pop-text">HAPPY CUSTOMERS</h6>
+            <div id="carouselExampleIndicators" class="carousel slide w-100 position-relative" data-bs-ride="carousel">
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container-fluild d-flex flex-column align-items-center bg-white slider-box ">
+                            <img src="./imgs/testimonial-1.jpg" class="rounded-circle" alt="">
+                            <h4 class="pop-text">Marissa Mayer</h4>
+                            <span class="pop-text">CEO, Yahoo</span>
+                            <p class="sans-text">Quo rem cumque facere modi beatae. Deleniti nisi, repellat quae
+                                aspernatur consequatur
+                                consequuntur, fugit asperiores delectus beatae. Quae veniam, quidem cupiditate quia? Ut
+                                iste deleniti.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container-fluild d-flex flex-column align-items-center bg-white slider-box ">
+                            <img src="./imgs/testimonial-2.jpg" class="rounded-circle" alt="">
+                            <h4 class="pop-text">Mark Zuckerberg</h4>
+                            <span class="pop-text">Founder & CEO, Facebook</span>
+                            <p class="sans-text">Quo rem cumque facere modi beatae. Deleniti nisi, repellat quae
+                                aspernatur consequatur
+                                consequuntur, fugit asperiores delectus beatae. Quae veniam, quidem cupiditate quia? Ut
+                                iste deleniti.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators position-static">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active " aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                </div>
+                <button class="carousel-control-prev slider-btns slider-btn-left" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next slider-btns slider-btn-right" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+
+    </section>
+    <!-- end slider -->
+
+
+    <!-- start contact -->
+    <section id="contact" class="contact overflow-hidden">
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col-lg-6 px-0 col-sm-12">
+                    <div class="map"><iframe class="w-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96708.15276722025!2d-74.03927157068742!3d40.75917036082614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2588f046ee661%3A0xa0b3281fcecc08c!2sManhattan%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2seg!4v1629507824319!5m2!1sen!2seg"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6 px-lg-0 col-sm-12">
+                    <div class="row">
+                        <div class=" mx-auto contact-box">
+                            <h2 class="pop-text">Get In Touch</h2>
+                            <h4 class="sans-text">Let's work together.</h4>
+                            <form action="">
+                                <label class="pop-text" for="nm">Your Name</label>
+                                <input type="text" name="name" id="nm" required>
+                                <label class="pop-text" for="em">Your Email</label>
+                                <input type="email" name="email" id="em" required>
+                                <label class="pop-text" for="num">Phone Number</label>
+                                <input type="number" name="numb" id="num" min="5000">
+                                <label class="pop-text "  for="ms">Your Message</label>
+                                <textarea style="height: 110px;" type="text" name="mess" id="ms" required></textarea>
+                                <button class="pop-text" type="submit">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end contact -->
+
+
+    <!-- link bootstrap.js -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
