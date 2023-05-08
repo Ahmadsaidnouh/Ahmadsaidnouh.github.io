@@ -171,7 +171,9 @@ ul {
 .justify-content-center {
     justify-content: center;
 }
-
+textarea {
+    font-family: 'Poppins', sans-serif !important;
+}
 /* aside */
 .aside {
     width: 270px;
