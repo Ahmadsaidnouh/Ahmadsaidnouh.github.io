@@ -471,6 +471,17 @@ h3.my-profession {
     margin: auto;
     border-radius: 5px;
 }
+@media screen and (max-width:687px) {
+    h3.my-profession {
+        font-size: 19px;
+    }
+    h3.hello {
+        font-size: 24px;
+    }
+    .home-info p {
+        font-size: 16px;
+    }
+}
 
 /* About */
 .about-text span{
