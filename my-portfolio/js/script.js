@@ -44,6 +44,20 @@ function displaySection(sectionName)
         document.querySelector(`.section.${currentSectionName}`).style.zIndex = "0"
         document.querySelector(`.section.${sectionName}`).style.zIndex = "1"
         document.querySelector(`.section.${sectionName}`).style.left = (screenWidth > 1199) ? "270px" : "0";
+        // let screenWidth = window.innerWidth;
+
+        // Increment the screen width by one
+        // console.log(window.innerWidth);
+        // window.innerWidth = screenWidth + 1;
+        // console.log(window.innerWidth);
+        // window.innerWidth = screenWidth - 1;
+        // console.log(window.innerWidth);
+
+        // var resizeEvent = new Event('resize');
+        // // Fire the resize event on the window object
+        // window.dispatchEvent(resizeEvent);
+        // window.dispatchEvent(resizeEvent);
+        
         setTimeout(() =>
         {
             document.querySelector(`.section.${currentSectionName}`).style.left = "100%"
@@ -134,3 +148,17 @@ document.getElementById("cards").onmousemove = e =>
         card.style.setProperty("--mouse-yy", `${z}px`)
     }
 }
+
+
+// scorllreveal
+const sr = ScrollReveal({
+    distance: '60px',
+    duration: 2500,
+    // delay: 400
+});
+
+sr.reveal(".home-info", { origin: 'top', interval: 100 })
+sr.reveal(".home-img", { origin: 'bottom' })
+// sr.reveal(".section-title, .about-text", { origin: 'top' })
+// sr.reveal(".personal-info", { origin: 'left' })
+// sr.reveal(".skills", { origin: 'right' })

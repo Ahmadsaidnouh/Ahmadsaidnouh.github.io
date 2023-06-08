@@ -67,7 +67,8 @@ ul {
     top: 0;
     left: 100%;
     overflow-y: auto;
-    height: 100vh;
+    height: 100dvh;
+    /* height: 100vh; */
     background-color: var(--bg-black-900);
     padding: 0 30px;
     display: block;
@@ -75,6 +76,7 @@ ul {
     transition: left 0.3s ease;
 }
 .section.home {
+    overflow-y: hidden;
     z-index: 1;
     left: 0;
 }
