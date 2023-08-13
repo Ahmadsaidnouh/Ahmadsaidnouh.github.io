@@ -918,7 +918,7 @@ h3.my-profession {
     align-items: center;
     height: 50dvh;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     /* color: var(--skin-color); */
     /* color: var(--text-black-900); */
 }
