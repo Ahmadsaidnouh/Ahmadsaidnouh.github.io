@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="./css/skin/color-4.css" class="alternate-style" title="color-4" disabled>
     <link rel="stylesheet" href="./css/skin/color-5.css" class="alternate-style" title="color-5" disabled>
     <link rel="stylesheet" href="./css/style-switcher.css">
+
+    <!-- emailjs -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> -->
+    <script type="text/javascript" src="./node_modules/@emailjs/browser/dist/email.min.js"></script>
+
 </head>
 
 <body class="dark">
@@ -68,7 +73,8 @@
                     <div class="icon"><a href="tel:+201153140023" target="_blank"><i class="fa fa-phone"></i></a></div>
                 </div>
                 <div class="aside-contact-info-container">
-                    <div class="icon"><a href="https://wa.me/+201153140023" target="_blank"><i class="fab fa-whatsapp"></i></a></div>
+                    <div class="icon"><a href="https://wa.me/+201153140023" target="_blank"><i
+                                class="fab fa-whatsapp"></i></a></div>
                 </div>
                 <!-- <div class="aside-contact-info-container">
                     <div class="icon"><a href="mailto:ahmedsaid2369@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></div>
@@ -100,8 +106,9 @@
                                 hesitate to
                                 reach out if you have any questions or potential collaborations. <br>
                                 Let's build something great together!</p>
-                            <a target="_blank" href="https://www.linkedin.com/in/ahmad-said-6a986b223/"
-                                class="btn hire-me">Hire Me</a>
+                            <a class="btn" href="#" onclick="displaySection('contact')">Hire Me</a>
+                            <!-- <a target="_blank" href="https://www.linkedin.com/in/ahmad-said-6a986b223/"
+                                class="btn hire-me">Hire Me</a> -->
                         </div>
                         <div class="home-img padd-15">
                             <img src="assets/profile/porfile2.JPG" alt="Profile Pic">
@@ -190,8 +197,9 @@
                                             <a target="_blank"
                                                 href="https://drive.google.com/file/d/1hMNRwFRr3yA7CRyiHCLFoSuREls_lR9q/view?usp=share_link"
                                                 class="btn">View CV</a>
-                                            <a target="_blank" href="https://www.linkedin.com/in/ahmad-said-6a986b223/"
-                                                class="btn hire-me">Hire Me</a>
+                                            <!-- <a target="_blank" href="https://www.linkedin.com/in/ahmad-said-6a986b223/"
+                                                class="btn hire-me">Hire Me</a> -->
+                                            <a class="btn" href="#" onclick="displaySection('contact')">Hire Me</a>
                                         </div>
                                     </div>
                                 </div>
@@ -607,7 +615,8 @@
                                     </div>
                                     <div class="portfolio-details">
                                         <h2>8 Puzzle Solver</h2>
-                                        <p>An extremely fast AI 8 puzzle solver allowing users to enter initial state and
+                                        <p>An extremely fast AI 8 puzzle solver allowing users to enter initial state
+                                            and
                                             then displays the steps to reach the final state (_12345678). The AI model
                                             was built in C++ and then compiled into WASM using Emscripten.</p>
                                         <span>HTML . CSS . JS . C++ . Emscripten</span>
@@ -1027,34 +1036,33 @@
                             <div class="row">
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
+                                        <input id="name" type="text" class="form-control" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input id="email" type="email" class="form-control" placeholder="Email">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Subject">
+                                        <input id="subject" type="text" class="form-control" placeholder="Subject">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <textarea class="form-control" placeholder="Message"></textarea>
+                                        <textarea id="message" class="form-control" placeholder="Message"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <a href="https://www.linkedin.com/in/ahmad-said-6a986b223/" class="btn"
-                                            target="_blank" rel="noopener noreferrer">Send Message</a>
+                                        <button class="btn pointer" onclick="sendEmail()">Send Message</button>
                                         <!-- <a type="submit"  href="https://www.linkedin.com/in/ahmad-said-6a986b223/" ></a> -->
                                     </div>
                                 </div>
@@ -1067,6 +1075,7 @@
         </div>
     </div>
     <!-- Main Container End -->
+
     <!-- Style Switcher Start -->
     <div class="style-switcher">
         <div class="style-switcher-toggler s-icon">
@@ -1086,21 +1095,6 @@
     </div>
     <!-- Style Switcher End -->
 
-    <!-- <div class="scroll-picker hidden">
-        <ul>
-          <li>Option 1</li>
-          <li>Option 2</li>
-          <li>Option 3</li>
-          <li>Option 4</li>
-          <li>Option 5</li>
-          <li>Option 6</li>
-          <li>Option 7</li>
-          <li>Option 8</li>
-          <li>Option 9</li>
-          <li>Option 10</li>
-        </ul>
-      </div>
-       -->
 
 
     <!-- jquery -->
@@ -1109,9 +1103,42 @@
     <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
     <!-- our javascript -->
     <script src="js/scrollreveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+        referrerpolicy="no-referrer"></script>
     <script src="./js/script.js"></script>
     <script src="./js/styleSwitcher.js"></script>
+
+    <!-- emailjs -->
+    <script src="js/email.js"></script>
+    <script type="text/javascript">
+        // import emailjs  from "node_modules/@emailjs/browser/dist/email.min.js";
+        function sendEmail() {
+            (function () {
+                emailjs.init("4A9UoZosCHKSbaWO8");
+            })();
+
+            let params = {
+                from_name: document.getElementById("name").value,
+                email_id: document.getElementById("email").value,
+                subject: document.getElementById("subject").value,
+                message: document.getElementById("message").value,
+
+            }
+            let serviceId = "service_llpescq";
+            let templateId = "template_bsomgsh";
+
+            emailjs.send(serviceId, templateId, params)
+                .then(res => {
+                    alert("Message Sent Successfully!");
+                    document.getElementById("name").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("subject").value = "";
+                    document.getElementById("message").value = "";
+                })
+                .catch();
+        }
+
+    </script>
 </body>
 
 </html>
