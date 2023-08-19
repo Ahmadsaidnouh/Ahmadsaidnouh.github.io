@@ -1036,33 +1036,33 @@
                             <div class="row">
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input id="name" type="text" class="form-control" placeholder="Name">
+                                        <input id="name" type="text" class="form-control" placeholder="Name" required>
                                     </div>
                                 </div>
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input id="email" type="email" class="form-control" placeholder="Email">
+                                        <input id="email" type="email" class="form-control" placeholder="Email" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <input id="subject" type="text" class="form-control" placeholder="Subject">
+                                        <input id="subject" type="text" class="form-control" placeholder="Subject" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <textarea id="message" class="form-control" placeholder="Message"></textarea>
+                                        <textarea id="message" class="form-control" placeholder="Message" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <button class="btn pointer" onclick="sendEmail()">Send Message</button>
+                                        <button id="contactBtn" class="btn pointer">Send Message</button>
                                         <!-- <a type="submit"  href="https://www.linkedin.com/in/ahmad-said-6a986b223/" ></a> -->
                                     </div>
                                 </div>
@@ -1098,7 +1098,7 @@
 
 
     <!-- jquery -->
-    <script src="./js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="./js/jquery-3.6.0.min.js"></script> -->
     <!-- bootstrap -->
     <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
     <!-- our javascript -->
@@ -1109,35 +1109,48 @@
     <script src="./js/styleSwitcher.js"></script>
 
     <!-- emailjs -->
-    <script src="js/email.js"></script>
     <script type="text/javascript">
-        // import emailjs  from "node_modules/@emailjs/browser/dist/email.min.js";
-        function sendEmail() {
-            (function () {
-                emailjs.init("4A9UoZosCHKSbaWO8");
-            })();
-
-            let params = {
-                from_name: document.getElementById("name").value,
-                email_id: document.getElementById("email").value,
-                subject: document.getElementById("subject").value,
-                message: document.getElementById("message").value,
-
+        document.getElementById("contactBtn").addEventListener("click", (e) => {
+            if (document.getElementById("name").value != "" && document.getElementById("email").value != "" && document.getElementById("subject").value != "" && document.getElementById("message").value) {
+                e.target.disabled = true;
+                e.target.innerHTML = "Sending ...";
+    
+                (function () {
+                    emailjs.init("4A9UoZosCHKSbaWO8");
+                })();
+    
+                let params = {
+                    from_name: document.getElementById("name").value,
+                    email_id: document.getElementById("email").value,
+                    subject: document.getElementById("subject").value,
+                    message: document.getElementById("message").value,
+    
+                }
+                let serviceId = "service_llpescq";
+                let templateId = "template_bsomgsh";
+    
+                emailjs.send(serviceId, templateId, params)
+                    .then(res => {
+                        e.target.innerHTML = "Sent Successfully!";
+                        e.target.style.cssText = "background: green;"
+                        setTimeout(() => {
+                            document.getElementById("name").value = "";
+                            document.getElementById("email").value = "";
+                            document.getElementById("subject").value = "";
+                            document.getElementById("message").value = "";
+                            e.target.style.cssText = "background: var(--skin-color);"
+                            e.target.innerHTML = "Send Message";
+                            e.target.disabled = false;
+                        }, 2500);
+                    })
+                    .catch();
             }
-            let serviceId = "service_llpescq";
-            let templateId = "template_bsomgsh";
+            else {
+                alert("Error: Must complete all contact form feilds!");
+            }
 
-            emailjs.send(serviceId, templateId, params)
-                .then(res => {
-                    alert("Message Sent Successfully!");
-                    document.getElementById("name").value = "";
-                    document.getElementById("email").value = "";
-                    document.getElementById("subject").value = "";
-                    document.getElementById("message").value = "";
-                })
-                .catch();
-        }
 
+        })
     </script>
 </body>
 

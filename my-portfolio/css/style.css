@@ -1001,7 +1001,10 @@ h3.my-profession {
     height: 50px;
     padding: 0 50 px;
 }
-
+#contactBtn {
+    min-width: 176.73px;
+    text-align: center;
+}
 /* media query */
 @media (max-width:2000px) and (min-width:1199px) {
     .section {
