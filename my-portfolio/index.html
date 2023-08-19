@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <!-- bootstrap -->
     <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
+    
     <!-- our css -->
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/skin/color-1.css">
+    <link rel="stylesheet" href="./css/cubespinner.css">
+    
+    <!-- default theme -->
+    <link rel="stylesheet" href="./css/skin/color-4.css">
+    
     <!-- Style Switcher -->
     <link rel="stylesheet" href="./css/skin/color-1.css" class="alternate-style" title="color-1" disabled>
     <link rel="stylesheet" href="./css/skin/color-2.css" class="alternate-style" title="color-2" disabled>
@@ -45,6 +50,8 @@
                             class="fa fa-home"></i><span>Home</span></a></li>
                 <li><a class="nav-link nav-about" href="#" onclick="displaySection('about')"><i
                             class="fa fa-user"></i><span>About</span></a></li>
+                <li><a class="nav-link nav-skills" href="#" onclick="displaySection('skills')"><i
+                            class="fa fa-list"></i><span>Skills</span></a></li>
                 <li><a class="nav-link nav-service" href="#" onclick="displaySection('service')"><i
                             class="fa fa-list"></i><span>Services</span></a></li>
                 <li><a class="nav-link nav-portfolio" href="#" onclick="displaySection('portfolio')"><i
@@ -133,7 +140,18 @@
                             <div class="row">
                                 <div class="about-text padd-15">
                                     <h3>I'm Ahmad Said Nouh ... A <span>Full Stack Web Developer</span></h3>
-                                    <p>Welcome to my portfolio! I'm a full stack web developer with a passion for coding
+                                    <p>
+                                        I'm an ambitious front-end developer seeking a role in a forward-thinking IT
+                                        company, eager to tackle diverse projects with cutting-edge technologies.
+                                        <br>
+                                        <br>
+                                        With quiet confidence and a curious nature, I continuously enhance my skills to solve
+                                        design challenges.
+                                        <br>
+                                        <br>
+                                        If I need to define myself in one sentence that would be a family
+                                        person, football enthusiast, painting lover, and tech aficionado.
+                                        <!-- Welcome to my portfolio! I'm a full stack web developer with a passion for coding
                                         and problem solving.
                                         Originally from Egypt, I spent most of my school years in Saudi Arabia before
                                         returning to Egypt to pursue my engineering degree at Alexandria University.
@@ -157,7 +175,7 @@
                                         unique, user-friendly,
                                         and effective websites and applications that can make a positive impact on
                                         people's lives. With two years of experience in the field, I'm excited to
-                                        continue exploring new challenges and expanding my skillset.
+                                        continue exploring new challenges and expanding my skillset. -->
 
                                     </p>
                                 </div>
@@ -204,8 +222,30 @@
                                     </div>
                                 </div>
                                 <div class="skills padd-15">
-                                    <div class="row">
-                                        <div class="skill-item padd-15">
+                                    <div class="row" style="background-color: aqua;">
+                                        <div class="stage-cube-cont">
+                                            <div class="cubespinner">
+                                                <div class="face1">
+                                                    <i class="fa-brands fa-angular" style="color:#dd0031;"></i>
+                                                </div>
+                                                <div class="face2">
+                                                    <i class="fa-brands fa-html5" style="color:#f06529;"></i>
+                                                </div>
+                                                <div class="face3">
+                                                    <i class="fa-brands fa-css3" style="color:#28a4d9;"></i>
+                                                </div>
+                                                <div class="face4">
+                                                    <i class="fa-brands fa-square-js" style="color:#efd81d;"></i>
+                                                </div>
+                                                <div class="face5">
+                                                    <i class="fa-brands fa-git-alt" style="color:#ec4d28;"></i>
+                                                </div>
+                                                <div class="face6">
+                                                    <i class="fa-brands fa-node" style="color:#2da829;"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="skill-item padd-15">
                                             <h5>Angular 2+</h5>
                                             <div class="progress">
                                                 <div class="progress-in" style="width:90%;"></div>
@@ -295,7 +335,7 @@
                                                 <div class="progress-in" style="width:95%;"></div>
                                                 <div class="skill-percent">95%</div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -423,6 +463,26 @@
                 </div>
             </section>
             <!-- About Section End -->
+            <!--  -->
+            <!--  -->
+            <!--  -->
+            <!-- Skills Section Start -->
+            <section class="skills section" id="skills">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>Skills & Experience</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="about-content padd-15">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Skills Section End -->
             <!--  -->
             <!--  -->
             <!--  -->
@@ -1041,21 +1101,24 @@
                                 </div>
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input id="email" type="email" class="form-control" placeholder="Email" required>
+                                        <input id="email" type="email" class="form-control" placeholder="Email"
+                                            required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <input id="subject" type="text" class="form-control" placeholder="Subject" required>
+                                        <input id="subject" type="text" class="form-control" placeholder="Subject"
+                                            required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <textarea id="message" class="form-control" placeholder="Message" required></textarea>
+                                        <textarea id="message" class="form-control" placeholder="Message"
+                                            required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1111,24 +1174,25 @@
     <!-- emailjs -->
     <script type="text/javascript">
         document.getElementById("contactBtn").addEventListener("click", (e) => {
-            if (document.getElementById("name").value != "" && document.getElementById("email").value != "" && document.getElementById("subject").value != "" && document.getElementById("message").value) {
+            if (document.getElementById("name").value != "" && document.getElementById("email").value != "" && document.getElementById("subject").value != "" && document.getElementById("message").value)
+            {
                 e.target.disabled = true;
                 e.target.innerHTML = "Sending ...";
-    
+
                 (function () {
                     emailjs.init("4A9UoZosCHKSbaWO8");
                 })();
-    
+
                 let params = {
                     from_name: document.getElementById("name").value,
                     email_id: document.getElementById("email").value,
                     subject: document.getElementById("subject").value,
                     message: document.getElementById("message").value,
-    
+
                 }
                 let serviceId = "service_llpescq";
                 let templateId = "template_bsomgsh";
-    
+
                 emailjs.send(serviceId, templateId, params)
                     .then(res => {
                         e.target.innerHTML = "Sent Successfully!";
@@ -1145,7 +1209,8 @@
                     })
                     .catch();
             }
-            else {
+            else
+            {
                 alert("Error: Must complete all contact form feilds!");
             }
 

@@ -1,0 +1,92 @@
+.stage-cube-cont {
+    width: 100%;
+    height: 350px;
+    top: 0;
+    padding-top: 18%;
+    margin-left: 0;
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+}
+
+.cubespinner {
+    animation-name: spincube;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 18s;
+    transform-style: preserve-3d;
+    transform-origin: 100px 100px 0;
+    margin-left: calc(50% - 100px);
+}
+
+.cubespinner div {
+    border-radius: 10px;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #0a0a0a;
+    background: rgb(0 0 0 / 40%);
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px 0 #292927;
+}
+body.dark .cubespinner div {
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px 0 lightyellow;
+}
+.face1 {
+    transform: translateZ(100px);
+}
+.face2 {
+    transform: rotateX(90deg) rotateZ(-90deg) translateZ(100px);
+}
+.face3 {
+    transform: rotateX(90deg) rotateY(90deg) rotateZ(-90deg) translateZ(100px);
+}
+.face4 {
+    transform: rotateY(180deg) rotateZ(90deg) translateZ(100px);
+}
+.face5 {
+    transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px);
+}
+.face6 {
+    transform: rotateX(-90deg) translateZ(100px);
+}
+@keyframes spincube {
+    from,
+    to {
+        /* angular */
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    12.5% {
+        /* css */
+        transform: rotateY(-90deg);
+    }
+    25% {
+        /* html */
+        transform: rotateY(-90deg) rotateZ(90deg);
+    }
+    37.5% {
+        /* js */
+        transform: rotateY(-180deg) rotateZ(90deg);
+    }
+    50% {
+        /* node */
+        transform: rotateY(-270deg) rotateZ(90deg);
+    }
+    62.5% {
+        /* node */
+        transform: rotateX(90deg);
+    }
+    75% {
+        /* git */
+        transform: rotateX(90deg) rotateZ(-90deg);
+    }
+    87.5% {
+        /* git */
+        transform: rotateX(0deg)  rotateZ(-90deg);
+    }
+}

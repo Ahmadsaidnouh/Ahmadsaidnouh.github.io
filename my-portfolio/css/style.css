@@ -20,6 +20,19 @@ body.dark {
     --text-black-500: #c9c7c7;
     --scroll-bg: 95, 95, 95
 }
+body .cubespinner div {
+    border-radius: 10px;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #0a0a0a;
+    background: rgb(0 0 0 / 40%);
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px 0 #292927;
+}
 
 body {
     margin: 0;
