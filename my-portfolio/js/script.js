@@ -164,24 +164,24 @@ const sr = ScrollReveal({
 // sr.reveal(".personal-info", { origin: 'left' })
 // sr.reveal(".skills", { origin: 'right' })
 let entries = [
-    { url:"", label: "Angular 2+"},
-    { url:"", label: "NodeJS"},
-    { url:"", label: "npm"},
-    { url:"", label: "RxJs"},
-    { url:"", label: "JSON"},
-    { url:"", label: "TypeScript"},
-    { url:"", label: "JavaScript"},
-    { url:"", label: "CSS3"},
-    { url:"", label: "HTML5"},
-    { url:"", label: "jQuery"},
-    { url:"", label: "Bootstrap"},
-    { url:"", label: "C/C++"},
-    { url:"", label: "Python"},
-    { url:"", label: "Java"},
-    { url:"", label: "SQL/Sequelize"},
-    { url:"", label: "MongoDB/Mongoose"},
-    { url:"", label: "Git/Github"},
-    { url:"", label: "Bash"}
+    { url:"https://angular.io/", label: "Angular 2+"},
+    { url:"https://nodejs.org/en", label: "NodeJS"},
+    { url:"https://www.npmjs.com/", label: "npm"},
+    { url:"https://rxjs.dev/", label: "RxJs"},
+    { url:"https://www.json.org/", label: "JSON"},
+    { url:"https://www.typescriptlang.org/", label: "TypeScript"},
+    { url:"https://developer.mozilla.org/en-US/docs/Web/JavaScript", label: "JavaScript"},
+    { url:"https://en.wikipedia.org/wiki/CSS", label: "CSS3"},
+    { url:"https://en.wikipedia.org/wiki/HTML5#:~:text=HTML5%20(Hypertext%20Markup%20Language%205,as%20the%20HTML%20Living%20Standard.", label: "HTML5"},
+    { url:"https://jquery.com/", label: "jQuery"},
+    { url:"https://getbootstrap.com/", label: "Bootstrap"},
+    { url:"https://cplusplus.com/", label: "C/C++"},
+    { url:"https://www.python.org/", label: "Python"},
+    { url:"https://www.java.com/", label: "Java"},
+    { url:"https://en.wikipedia.org/wiki/SQL", label: "SQL/Sequelize"},
+    { url:"https://www.mongodb.com/", label: "MongoDB/Mongoose"},
+    { url:"https://github.com/", label: "Git/Github"},
+    { url:"https://www.gnu.org/software/bash/", label: "Bash"}
 ]
 
 let settings = {
