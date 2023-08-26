@@ -157,8 +157,76 @@ const sr = ScrollReveal({
     // delay: 400
 });
 
-sr.reveal(".home-info", { origin: 'top', interval: 100 })
-sr.reveal(".home-img", { origin: 'bottom' })
+// sr.reveal(".home-info", { origin: 'top', interval: 100 })
+// sr.reveal(".home-img", { origin: 'bottom' })
+
 // sr.reveal(".section-title, .about-text", { origin: 'top' })
 // sr.reveal(".personal-info", { origin: 'left' })
 // sr.reveal(".skills", { origin: 'right' })
+let entries = [
+    { url:"", label: "Angular 2+"},
+    { url:"", label: "NodeJS"},
+    { url:"", label: "npm"},
+    { url:"", label: "RxJs"},
+    { url:"", label: "JSON"},
+    { url:"", label: "TypeScript"},
+    { url:"", label: "JavaScript"},
+    { url:"", label: "CSS3"},
+    { url:"", label: "HTML5"},
+    { url:"", label: "jQuery"},
+    { url:"", label: "Bootstrap"},
+    { url:"", label: "C/C++"},
+    { url:"", label: "Python"},
+    { url:"", label: "Java"},
+    { url:"", label: "SQL/Sequelize"},
+    { url:"", label: "MongoDB/Mongoose"},
+    { url:"", label: "Git/Github"},
+    { url:"", label: "Bash"}
+]
+
+let settings = {
+
+    entries: entries,
+    width: "92%",
+    height: "92%",
+    radius: '80%',
+    bgColor: "transparent",
+    speed: 0.5,
+    fontFamily: "oswald, Arial, sans-serif",
+    // fontColor: "#fff",
+    // tooltipDiffX: 0,
+    // tooltipDiffY: 10,
+    // radiusMin: 75,
+    // bgDraw: true,
+    // bgColor: '#111',
+    // opacityOver: 1.00,
+    // opacityOut: 0.05,
+    // opacitySpeed: 6,
+    // fov: 800,
+    // speed: 2,
+    // fontFamily: 'Oswald, Arial, sans-serif',
+    fontSize: '20',
+    // fontColor: 'var(--text-black-900)',
+    fontColor: 'var(--skin-color)',
+    fontWeight: 'bold',//bold
+    // fontStyle: 'normal',//italic 
+    fontStretch: 'wider',//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
+    // fontToUpperCase: true,
+    // tooltipFontFamily: 'Oswald, Arial, sans-serif',
+    // tooltipFontSize: '11',
+    tooltipFontColor: 'var(--skin-color)',
+    // tooltipFontWeight: 'normal',//bold
+    // tooltipFontStyle: 'normal',//italic 
+    // tooltipFontStretch: 'wider',//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
+    // tooltipFontToUpperCase: false,
+    // tooltipTextAnchor: 'left',
+    tooltipDiffX: 0,
+    tooltipDiffY: 10,
+    // animatingSpeed: 0.01,
+    // animatingRadiusLimit: 1.3
+
+};
+
+let svg3DTagCloud = new SVG3DTagCloud(document.getElementById("my3DTagCloud"), settings);
+
+displaySection('skillss')

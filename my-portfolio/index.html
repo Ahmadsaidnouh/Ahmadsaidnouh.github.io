@@ -13,14 +13,14 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <!-- bootstrap -->
     <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
-    
+
     <!-- our css -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/cubespinner.css">
-    
+
     <!-- default theme -->
     <link rel="stylesheet" href="./css/skin/color-4.css">
-    
+
     <!-- Style Switcher -->
     <link rel="stylesheet" href="./css/skin/color-1.css" class="alternate-style" title="color-1" disabled>
     <link rel="stylesheet" href="./css/skin/color-2.css" class="alternate-style" title="color-2" disabled>
@@ -33,6 +33,12 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> -->
     <script type="text/javascript" src="./node_modules/@emailjs/browser/dist/email.min.js"></script>
 
+
+    <!-- svg3Dtagcloud -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script src='js/jquery.svg3dtagcloud.min.js'></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 
 <body class="dark">
@@ -50,8 +56,8 @@
                             class="fa fa-home"></i><span>Home</span></a></li>
                 <li><a class="nav-link nav-about" href="#" onclick="displaySection('about')"><i
                             class="fa fa-user"></i><span>About</span></a></li>
-                <li><a class="nav-link nav-skills" href="#" onclick="displaySection('skills')"><i
-                            class="fa fa-list"></i><span>Skills</span></a></li>
+                <li><a class="nav-link nav-skillss" href="#" onclick="displaySection('skillss')"><i
+                            class="fas fa-gear"></i><span>Skills</span></a></li>
                 <li><a class="nav-link nav-service" href="#" onclick="displaySection('service')"><i
                             class="fa fa-list"></i><span>Services</span></a></li>
                 <li><a class="nav-link nav-portfolio" href="#" onclick="displaySection('portfolio')"><i
@@ -145,7 +151,8 @@
                                         company, eager to tackle diverse projects with cutting-edge technologies.
                                         <br>
                                         <br>
-                                        With quiet confidence and a curious nature, I continuously enhance my skills to solve
+                                        With quiet confidence and a curious nature, I continuously enhance my skills to
+                                        solve
                                         design challenges.
                                         <br>
                                         <br>
@@ -435,10 +442,9 @@
                                                     <p class="timeline-text">
                                                         I completed a 9-month full stack development diploma at Route IT
                                                         center in Egypt where I achieved remarkable accomplishments. In
-                                                        the Frontend Development final <a
+                                                        the Frontend Development final <a class="special-link"
                                                             href="https://ahmadsaidnouh.github.io/route-projects/frontend-exam/index.html"
-                                                            target="_blank" rel="noopener noreferrer"
-                                                            style="color: var(--skin-color);margin: 0;">test</a> , I
+                                                            target="_blank" rel="noopener noreferrer">test</a> , I
                                                         ranked 1st among all the
                                                         participants in Cairo and Alexandria with a perfect score of
                                                         100%. In the Backend Development final test, I achieved an
@@ -467,18 +473,60 @@
             <!--  -->
             <!--  -->
             <!-- Skills Section Start -->
-            <section class="skills section" id="skills">
-                <div class="container">
+            <section class="skillss section" id="skillss">
+                <!-- <div class="container pb-3">
                     <div class="row">
-                        <div class="section-title padd-15">
-                            <h2>Skills & Experience</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="about-content padd-15">
+                        <div class="skills-content padd-15 pe-lg-0">
                             <div class="row">
+                                <div class="skills-text">
+                                    <div class="section-title">
+                                        <h2>Skills & Experience</h2>
+                                    </div>
+                                    My skills are ...
+                                </div>
+                                <div id="my3DTagCloud">
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div> -->
+                <div class="container pb-3">
+                    <div class="skills-content pe-lg-0">
+
+                        <div class="skills-text">
+                            <div class="section-title">
+                                <h2>Skills & Experience</h2>
+                            </div>
+                            <p>
+                                Expert in front-end development including technologies like
+                                <span class="skill-tag">HTML5</span>,
+                                <span class="skill-tag">CSS3</span>,
+                                <span class="skill-tag">JavaScript</span>,
+                                <span class="skill-tag">jQuery</span>,
+                                <span class="skill-tag">Angular2</span>,
+                                <span class="skill-tag">TypeScript</span>,
+                                <span class="skill-tag">Bootstrap</span>,
+                                <span class="skill-tag">Git</span>, etc.
+                            </p>
+                            <p>
+                                I’m not a designer but I have a good sense of aesthetics, and
+                                experience in responsive, mobile-first web design. I put special
+                                effort into optimizing my code and providing the best user
+                                experience. I would love to give you any kind of support also after
+                                the project's completion. I guarantee a commitment during work on
+                                your project.
+                            </p>
+                            <p>
+                                Visit my <a class="special-link" href="https://www.linkedin.com/in/ahmad-said-6a986b223"
+                                    target="_blank">LinkedIn</a> profile for more details. Also you can checkout
+                                my cv on this <a class="special-link"
+                                    href="https://drive.google.com/file/d/1hMNRwFRr3yA7CRyiHCLFoSuREls_lR9q/view?usp=share_link"
+                                    target="_blank">link</a>.
+                            </p>
+                        </div>
+                        <div id="my3DTagCloud">
+                        </div>
+
                     </div>
                 </div>
             </section>
