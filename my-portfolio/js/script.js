@@ -228,5 +228,3 @@ let settings = {
 };
 
 let svg3DTagCloud = new SVG3DTagCloud(document.getElementById("my3DTagCloud"), settings);
-
-displaySection('skillss')
