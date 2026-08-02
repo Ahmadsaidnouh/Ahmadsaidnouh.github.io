@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ahmad-habiba/forever</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface-2: #0a0d12;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --text-faint: #6e7681;
+    --merge: #a371f7;
+    --add: #3fb950;
+    --amber: #d29922;
+    --link: #58a6ff;
+    --red: #f85149;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, .mono{ font-family: 'JetBrains Mono', monospace; }
+
+  a{ color: var(--link); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--link); outline-offset: 3px; }
+
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* top bar */
+  .topbar{
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+    padding: 14px 0;
+  }
+  .topbar .wrap{ display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono', monospace; font-size: 13px; color: var(--text-dim);}
+  .topbar .repo-icon{ color: var(--text-faint); }
+  .topbar strong{ color: var(--text); font-weight:600; }
+  .visibility{
+    font-size: 11px; border:1px solid var(--border); border-radius: 999px;
+    padding: 1px 8px; color: var(--text-dim); margin-left: 2px;
+  }
+
+  /* hero: terminal */
+  .hero{ padding: 56px 0 24px; }
+  .terminal{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  }
+  .terminal-head{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px;
+    background: #0a0d12;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot{ width:11px; height:11px; border-radius:50%; }
+  .dot.r{ background:#ff5f56;} .dot.y{ background:#ffbd2e;} .dot.g{ background:#27c93f;}
+  .terminal-title{
+    margin: 0 auto; transform: translateX(-16px);
+    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--text-faint);
+  }
+  .terminal-body{
+    padding: 22px 20px 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    min-height: 168px;
+  }
+  .terminal-body .line{ margin: 0 0 6px; white-space: pre-wrap; }
+  .prompt{ color: var(--add); }
+  .path{ color: var(--link); }
+  .out-dim{ color: var(--text-dim); }
+  .out-merge{ color: var(--merge); font-weight:600; }
+  .cursor{
+    display:inline-block; width:8px; height:16px; background: var(--text);
+    vertical-align: -3px; animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-names{
+    text-align:center; margin: 34px 0 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: clamp(34px, 7vw, 56px);
+    letter-spacing: -0.02em;
+  }
+  .hero-names .amp{ color: var(--merge); font-family:'JetBrains Mono', monospace; font-weight: 600; }
+  .hero-sub{
+    text-align:center; color: var(--text-dim); font-family:'JetBrains Mono', monospace;
+    font-size: 13px; margin-bottom: 8px;
+  }
+  .badges{ display:flex; justify-content:center; gap:8px; margin: 18px 0 8px; flex-wrap: wrap; }
+  .badge{
+    font-family:'JetBrains Mono', monospace; font-size: 11px; font-weight:600;
+    padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border);
+    color: var(--text-dim); background: var(--surface);
+  }
+  .badge.merged{ color: #fff; background: var(--merge); border-color: var(--merge); }
+  .badge.status{ color: #fff; background: var(--add); border-color: var(--add); }
+
+  /* section shell */
+  section{ padding: 40px 0; border-top: 1px solid var(--border); }
+  .section-label{
+    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--text-faint);
+    text-transform: lowercase; margin-bottom: 14px; display:flex; align-items:center; gap:8px;
+  }
+  .section-label::before{ content:'//'; color: var(--text-faint); }
+
+  /* readme */
+  .readme{
+    background: var(--surface); border:1px solid var(--border); border-radius: 10px; padding: 26px 28px;
+  }
+  .readme h2{ margin:0 0 6px; font-size: 20px; font-family:'JetBrains Mono', monospace; }
+  .readme p{ color: var(--text-dim); font-size: 15.5px; margin: 12px 0 0; }
+  .readme .quote{
+    margin-top: 16px; padding: 10px 14px; border-left: 3px solid var(--merge);
+    color: var(--text); background: rgba(163,113,247,0.07); border-radius: 0 6px 6px 0;
+    font-size: 14.5px;
+  }
+
+  /* commit log for details */
+  .commit{
+    display: grid; grid-template-columns: 28px 1fr auto; gap: 14px;
+    padding: 16px 4px; border-bottom: 1px solid var(--border); align-items: start;
+  }
+  .commit:last-child{ border-bottom: none; }
+  .commit-dot{
+    width: 10px; height:10px; border-radius:50%; background: var(--merge);
+    margin-top: 6px; position: relative;
+  }
+  .commit-msg{ font-weight: 600; font-size: 15.5px; }
+  .commit-meta{ color: var(--text-dim); font-size: 13.5px; margin-top: 4px; }
+  .commit-meta .k{ color: var(--text-faint); }
+  .commit-hash{
+    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--text-faint);
+    background: var(--surface); border:1px solid var(--border); padding: 2px 7px; border-radius: 5px;
+    height: fit-content;
+  }
+
+  /* diff style dress code */
+  .diff{
+    font-family:'JetBrains Mono', monospace; font-size: 13.5px;
+    background: var(--surface); border:1px solid var(--border); border-radius: 8px; overflow:hidden;
+  }
+  .diff-row{ padding: 7px 14px; border-bottom: 1px solid var(--border); }
+  .diff-row:last-child{ border-bottom:none; }
+  .diff-add{ background: rgba(63,185,80,0.08); color: #7ee2a8; }
+  .diff-del{ background: rgba(248,81,73,0.08); color: #ff9891; text-decoration: line-through; text-decoration-color: rgba(255,152,145,0.5); }
+
+  /* RSVP */
+  .rsvp-box{
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px 28px;
+  }
+  .rsvp-box h2{ margin: 0 0 8px; font-size: 19px; }
+  .rsvp-box p{ color: var(--text-dim); margin: 0 0 18px; font-size: 15px; }
+  .cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--add); color: #0d1117; font-weight:700;
+    font-family:'JetBrains Mono', monospace; font-size: 14px;
+    padding: 11px 18px; border-radius: 6px; border: none; cursor: pointer;
+  }
+  .cta:hover{ background: #4fd964; text-decoration:none; }
+  .deadline{
+    margin-top: 14px; font-family:'JetBrains Mono', monospace; font-size: 12.5px; color: var(--amber);
+  }
+
+  /* interactive PR / RSVP form */
+  .pr-form{ margin-top: 4px; }
+  .pr-input-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .pr-input{
+    flex:1; min-width:200px;
+    background: var(--surface-2); border:1px solid var(--border); border-radius:6px;
+    color: var(--text); font-family:'JetBrains Mono', monospace; font-size:14px;
+    padding: 11px 14px;
+  }
+  .pr-input::placeholder{ color: var(--text-faint); }
+  .pr-input:focus-visible{ outline:2px solid var(--link); outline-offset:1px; border-color: var(--link); }
+  .cta:disabled{ opacity:.55; cursor:not-allowed; }
+  .pr-status{ margin-top:18px; font-family:'JetBrains Mono', monospace; font-size:13.5px; }
+  .pr-status.hidden{ display:none; }
+  .pr-status .line{
+    margin:0 0 7px; display:flex; align-items:center; gap:8px; color: var(--text-dim);
+    opacity:0; transform: translateY(4px); animation: pr-in .35s ease forwards;
+  }
+  .pr-status .line.ok{ color: var(--add); }
+  @keyframes pr-in{ to{ opacity:1; transform:none; } }
+  .pr-spin{
+    display:inline-block; width:12px; height:12px; flex:none;
+    border:2px solid var(--text-faint); border-top-color: var(--link);
+    border-radius:50%; animation: pr-spin .7s linear infinite;
+  }
+  @keyframes pr-spin{ to{ transform: rotate(360deg); } }
+  .pr-merged-badge{
+    margin-top:14px; display:inline-flex; align-items:center; gap:8px;
+    background: var(--merge); color:#fff; font-weight:700; font-family:'JetBrains Mono', monospace;
+    font-size:14px; padding:10px 16px; border-radius:6px; opacity:0; transform: scale(.92);
+    animation: pr-pop .4s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes pr-pop{ to{ opacity:1; transform:scale(1); } }
+  .pr-error{
+    margin-top:12px; color: var(--red); font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
+  .pr-error.hidden{ display:none; }
+
+  footer{
+    padding: 30px 0 50px; text-align:center; color: var(--text-faint);
+    font-family:'JetBrains Mono', monospace; font-size: 12px;
+  }
+
+  .placeholder{ color: var(--amber); }
+
+  @media (max-width: 520px){
+    .commit{ grid-template-columns: 20px 1fr; }
+    .commit-hash{ grid-column: 2; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation: none; }
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <span class="repo-icon">⌥</span>
+      <span><strong>ahmad</strong> / <strong>habiba</strong></span>
+      <span class="visibility">public</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="wrap">
+      <div class="terminal">
+        <div class="terminal-head">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="terminal-title">zsh — forever</span>
+        </div>
+        <div class="terminal-body" id="term"></div>
+      </div>
+
+      <div class="hero-names">Ahmad <span class="amp">&amp;</span> Habiba</div>
+      <div class="hero-sub">$ git log --oneline --graph -1</div>
+
+      <div class="badges">
+        <span class="badge merged">⑂ merged</span>
+        <span class="badge status">● status: getting married</span>
+        <span class="badge">build passing</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label">README.md</div>
+      <div class="readme">
+        <h2># the wedding of Ahmad &amp; Habiba</h2>
+        <p>Two independent branches, several years of commits, countless late-night debugging sessions and shared deploys — merging into one main branch. No conflicts. Fast-forward merge. You're invited to witness the release.</p>
+        <div class="quote">"It compiled on the first try. We knew." — Ahmad &amp; Habiba</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label">commit history — the big day</div>
+
+      <div class="commit">
+        <div class="commit-dot"></div>
+        <div>
+          <div class="commit-msg">feat: the wedding — ceremony &amp; reception</div>
+          <div class="commit-meta"><span class="k">when</span> Aug 8, 2026 · 7:00 – 11:00 PM · <span class="k">where</span> La Garda Hall</div>
+        </div>
+        <div class="commit-hash">a1b2c3d</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-dot"></div>
+        <div>
+          <div class="commit-msg">chore: directions</div>
+          <div class="commit-meta"><span class="k">address</span> Smouha, El Nasr Armed Forces Club — in front of Green Plaza</div>
+        </div>
+        <div class="commit-hash">7c8d9e0</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label">dress-code.diff</div>
+      <div class="diff">
+        <div class="diff-row diff-del">- jeans &amp; hoodies (dev default)</div>
+        <div class="diff-row diff-add">+ formal / cocktail attire</div>
+        <div class="diff-row diff-add">+ optional: subtle nod to your favorite IDE theme 😉</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label">pull-requests — RSVP</div>
+      <div class="rsvp-box">
+        <h2>Open a pull request to attend</h2>
+        <p>Confirm your seat before the branch is merged for good. Enter your full name as the commit message and push.</p>
+
+        <form class="pr-form" id="pr-form" novalidate>
+          <div class="pr-input-row">
+            <input
+              class="pr-input mono"
+              id="pr-name"
+              type="text"
+              name="name"
+              placeholder='git commit -m "Your Full Name"'
+              autocomplete="name"
+              maxlength="80"
+              required
+            />
+            <button class="cta" id="pr-submit" type="submit">⑂ push --open-pr</button>
+          </div>
+
+          <div class="pr-status hidden" id="pr-status" aria-live="polite"></div>
+          <div class="pr-error hidden" id="pr-error" role="alert"></div>
+        </form>
+
+        <div class="deadline">$ deadline: Aug 7, 2026 — merge window closes after this.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    // built with love, compiled without bugs · 2026
+  </footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('term');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var lines = [
+      {t:'prompt', text:'ahmad@love'}, {t:'plain', text:':'}, {t:'path', text:'~/forever'}, {t:'plain', text:'$ git merge habiba'},
+    ];
+
+    function renderStatic(){
+      el.innerHTML =
+        '<p class="line"><span class="prompt">ahmad@love</span><span class="out-dim">:</span><span class="path">~/forever</span><span> $ git merge habiba</span></p>' +
+        '<p class="line out-dim">Auto-merging life.js</p>' +
+        '<p class="line out-dim">Auto-merging future-plans.md</p>' +
+        '<p class="line out-merge">Merge made by the "till-death-do-us-part" strategy.</p>' +
+        '<p class="line out-dim">2 people changed, forever files modified</p>' +
+        '<p class="line"><span class="prompt">ahmad@love</span><span class="out-dim">:</span><span class="path">~/forever</span><span> $ </span><span class="cursor"></span></p>';
+    }
+
+    if(reduce){ renderStatic(); return; }
+
+    var script = [
+      {text:'ahmad@love:~/forever $ git merge habiba', cls:''},
+      {text:'Auto-merging life.js', cls:'out-dim'},
+      {text:'Auto-merging future-plans.md', cls:'out-dim'},
+      {text:'Merge made by the "till-death-do-us-part" strategy.', cls:'out-merge'},
+      {text:'release v1.0.0 tagged: La Garda Hall, 08.08.2026, 7-11pm', cls:'out-dim'},
+      {text:'ahmad@love:~/forever $ ', cls:'', last:true}
+    ];
+
+    var li = 0, ci = 0;
+    function typeLine(){
+      if(li >= script.length){ 
+        var p = el.querySelectorAll('.line')[el.querySelectorAll('.line').length-1];
+        var cur = document.createElement('span'); cur.className='cursor'; p.appendChild(cur);
+        return;
+      }
+      var current = script[li];
+      var p = document.createElement('p');
+      p.className = 'line ' + current.cls;
+      el.appendChild(p);
+
+      function typeChar(){
+        if(ci <= current.text.length){
+          p.textContent = current.text.slice(0, ci);
+          ci++;
+          setTimeout(typeChar, current.last ? 55 : 14);
+        } else {
+          ci = 0; li++;
+          setTimeout(typeLine, current.last ? 0 : 220);
+        }
+      }
+      typeChar();
+    }
+    typeLine();
+  })();
+</script>
+
+<script>
+  (function(){
+    var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlgqyvee';
+
+    var form = document.getElementById('pr-form');
+    var input = document.getElementById('pr-name');
+    var submitBtn = document.getElementById('pr-submit');
+    var statusEl = document.getElementById('pr-status');
+    var errorEl = document.getElementById('pr-error');
+
+    function delay(ms){
+      return new Promise(function(resolve){ setTimeout(resolve, ms); });
+    }
+
+    function addStatusLine(text, opts){
+      opts = opts || {};
+      var line = document.createElement('div');
+      line.className = 'line' + (opts.ok ? ' ok' : '');
+      if(opts.spin){
+        var spinner = document.createElement('span');
+        spinner.className = 'pr-spin';
+        line.appendChild(spinner);
+      }
+      var label = document.createElement('span');
+      label.textContent = (opts.ok ? '✓ ' : '') + text;
+      line.appendChild(label);
+      statusEl.appendChild(line);
+      return line;
+    }
+
+    function removeSpinner(line){
+      var spinner = line.querySelector('.pr-spin');
+      if(spinner){ spinner.remove(); }
+    }
+
+    function showSuccessBadge(name){
+      var badge = document.createElement('div');
+      badge.className = 'pr-merged-badge';
+      badge.textContent = '🎉 seat confirmed — welcome, ' + name;
+      statusEl.appendChild(badge);
+    }
+
+    function showError(){
+      errorEl.textContent = "Hmm, the push didn't go through. Please try again, or message us directly.";
+      errorEl.classList.remove('hidden');
+      submitBtn.disabled = false;
+      input.disabled = false;
+    }
+
+    function resetStatus(){
+      statusEl.innerHTML = '';
+      statusEl.classList.remove('hidden');
+      errorEl.classList.add('hidden');
+      errorEl.textContent = '';
+    }
+
+    async function handleSubmit(name){
+      var openingLine = addStatusLine('Opening pull request from ahmad-habiba:rsvp \u2192 main\u2026', { spin: true });
+      await delay(500);
+      removeSpinner(openingLine);
+
+      var checksLine = addStatusLine('Running checks\u2026', { spin: true });
+      await delay(800);
+
+      var response;
+      try{
+        response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, event: 'Ahmad & Habiba wedding RSVP' })
+        });
+        if(!response.ok){
+          throw new Error('Request failed with status ' + response.status);
+        }
+      } catch(err){
+        console.error('RSVP submission failed:', err);
+        removeSpinner(checksLine);
+        showError();
+        return;
+      }
+
+      removeSpinner(checksLine);
+      addStatusLine('Checks passed', { ok: true });
+      await delay(450);
+      addStatusLine('Merged into main', { ok: true });
+      await delay(500);
+      showSuccessBadge(name);
+
+      submitBtn.textContent = '\u2713 merged';
+      input.disabled = true;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var name = input.value.trim();
+      if(!name){
+        input.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      input.disabled = true;
+      resetStatus();
+
+      handleSubmit(name);
+    });
+  })();
+</script>
+
+</body>
+</html>
