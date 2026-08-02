@@ -197,9 +197,8 @@
 
   /* interactive PR / RSVP form */
   .pr-form{ margin-top: 4px; }
-  .pr-input-row{ display:flex; gap:10px; flex-wrap:wrap; }
   .pr-input{
-    flex:1; min-width:200px;
+    display:block; width:100%;
     background: var(--surface-2); border:1px solid var(--border); border-radius:6px;
     color: var(--text); font-family:'JetBrains Mono', monospace; font-size:14px;
     padding: 11px 14px;
@@ -212,6 +211,7 @@
   }
   .pr-preview .pr-preview-name{ color: var(--text); }
   .pr-preview .pr-preview-name:empty::after{ content:'\2026'; color: var(--text-faint); }
+  .pr-submit-btn{ display:inline-flex; margin-top: 16px; }
   .cta:disabled{ opacity:.55; cursor:not-allowed; }
   .pr-status{ margin-top:18px; font-family:'JetBrains Mono', monospace; font-size:13.5px; }
   .pr-status.hidden{ display:none; }
@@ -342,20 +342,18 @@
         <p>Confirm your seat before the branch is merged for good. Enter your full name as the commit message and push.</p>
 
         <form class="pr-form" id="pr-form" novalidate>
-          <div class="pr-input-row">
-            <input
-              class="pr-input mono"
-              id="pr-name"
-              type="text"
-              name="name"
-              placeholder="Your Full Name"
-              autocomplete="name"
-              maxlength="80"
-              required
-            />
-            <button class="cta" id="pr-submit" type="submit">⑂ push --open-pr</button>
-          </div>
+          <input
+            class="pr-input mono"
+            id="pr-name"
+            type="text"
+            name="name"
+            placeholder="Your Full Name"
+            autocomplete="name"
+            maxlength="80"
+            required
+          />
           <div class="pr-preview mono">git commit -m &quot;<span class="pr-preview-name" id="pr-preview-name"></span>&quot;</div>
+          <button class="cta pr-submit-btn" id="pr-submit" type="submit">⑂ push --open-pr</button>
 
           <div class="pr-status hidden" id="pr-status" aria-live="polite"></div>
           <div class="pr-error hidden" id="pr-error" role="alert"></div>
