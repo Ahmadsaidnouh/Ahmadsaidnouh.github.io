@@ -189,6 +189,12 @@
   }
   .pr-input::placeholder{ color: var(--text-faint); }
   .pr-input:focus-visible{ outline:2px solid var(--link); outline-offset:1px; border-color: var(--link); }
+  .pr-preview{
+    margin-top: 12px; font-family:'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--text-dim);
+  }
+  .pr-preview .pr-preview-name{ color: var(--text); }
+  .pr-preview .pr-preview-name:empty::after{ content:'\2026'; color: var(--text-faint); }
   .cta:disabled{ opacity:.55; cursor:not-allowed; }
   .pr-status{ margin-top:18px; font-family:'JetBrains Mono', monospace; font-size:13.5px; }
   .pr-status.hidden{ display:none; }
@@ -325,13 +331,14 @@
               id="pr-name"
               type="text"
               name="name"
-              placeholder='git commit -m "Your Full Name"'
+              placeholder="Your Full Name"
               autocomplete="name"
               maxlength="80"
               required
             />
             <button class="cta" id="pr-submit" type="submit">⑂ push --open-pr</button>
           </div>
+          <div class="pr-preview mono">git commit -m &quot;<span class="pr-preview-name" id="pr-preview-name"></span>&quot;</div>
 
           <div class="pr-status hidden" id="pr-status" aria-live="polite"></div>
           <div class="pr-error hidden" id="pr-error" role="alert"></div>
@@ -413,6 +420,11 @@
     var submitBtn = document.getElementById('pr-submit');
     var statusEl = document.getElementById('pr-status');
     var errorEl = document.getElementById('pr-error');
+    var previewName = document.getElementById('pr-preview-name');
+
+    input.addEventListener('input', function(){
+      previewName.textContent = input.value;
+    });
 
     function delay(ms){
       return new Promise(function(resolve){ setTimeout(resolve, ms); });
