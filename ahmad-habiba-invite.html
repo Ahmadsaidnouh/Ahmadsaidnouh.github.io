@@ -150,6 +150,10 @@
     background: var(--surface); border:1px solid var(--border); padding: 2px 7px; border-radius: 5px;
     height: fit-content;
   }
+  .commit-map-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:8px;
+    font-family:'JetBrains Mono', monospace; font-size: 12.5px; color: var(--link);
+  }
 
   /* diff style dress code */
   .diff{
@@ -300,6 +304,7 @@
         <div>
           <div class="commit-msg">chore: directions</div>
           <div class="commit-meta"><span class="k">address</span> Smouha, El Nasr Armed Forces Club — in front of Green Plaza</div>
+          <a class="commit-map-link" href="https://maps.app.goo.gl/RjNEzNqnT91pisTJA?g_st=ic" target="_blank" rel="noopener noreferrer">↗ open in Google Maps</a>
         </div>
         <div class="commit-hash">7c8d9e0</div>
       </div>
@@ -311,8 +316,7 @@
       <div class="section-label">dress-code.diff</div>
       <div class="diff">
         <div class="diff-row diff-del">- jeans &amp; hoodies (dev default)</div>
-        <div class="diff-row diff-add">+ formal / cocktail attire</div>
-        <div class="diff-row diff-add">+ optional: subtle nod to your favorite IDE theme 😉</div>
+        <div class="diff-row diff-add">+ wear whatever you'll feel most comfortable in (small exception 😉)</div>
       </div>
     </div>
   </section>
