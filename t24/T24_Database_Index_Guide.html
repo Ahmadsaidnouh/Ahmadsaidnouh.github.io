@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>T24 Database Index Creation Guide</title>
+<style>
+/* VOICE: calm technical handbook for a T24 team
+   IDEA: a field guide that follows one record from Browser down to Oracle
+   PICTURE: layered diagrams (Browser -> JQL -> TAFJ -> view -> table)
+   COLOUR and TYPE: white, ink, one blue accent, system fonts
+   LAYOUT: one reading column, wide figures */
+:root{color-scheme:light;--bg:#fff;--ink:#14110f;--mute:#5b5b66;--acc:#1d4fd8;--acc2:#e8eefc;--line:#dcdce4;--code:#f4f5fa;--ok:#0f7a3d;--okbg:#e7f6ec;--bad:#b42318;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff6e0}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif}
+main{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:0 0 8px}
+.sub{color:var(--mute);margin:0 0 24px}
+h2{font-size:24px;margin:48px 0 12px;padding-top:18px;border-top:2px solid var(--ink)}
+h3{font-size:18px;margin:26px 0 8px}
+p,li{max-width:75ch}
+code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.9em;background:var(--code);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+pre{background:var(--code);border:1px solid var(--line);padding:14px 16px;border-radius:6px;overflow-x:auto;font-size:13.5px;line-height:1.5}
+pre code{background:none;padding:0;overflow-wrap:normal}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--code)}
+.scroll{overflow-x:auto}
+nav.toc{background:var(--code);border:1px solid var(--line);border-radius:6px;padding:12px 18px;margin:20px 0}
+nav.toc ol{margin:6px 0;padding-left:20px}
+.note{border-left:4px solid var(--acc);background:var(--acc2);padding:10px 14px;margin:14px 0;border-radius:0 6px 6px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warnbg);padding:10px 14px;margin:14px 0;border-radius:0 6px 6px 0}
+.ok{border-left:4px solid var(--ok);background:var(--okbg);padding:10px 14px;margin:14px 0;border-radius:0 6px 6px 0}
+.bad{border-left:4px solid var(--bad);background:var(--badbg);padding:10px 14px;margin:14px 0;border-radius:0 6px 6px 0}
+/* figures */
+.fig{border:1px solid var(--line);border-radius:8px;padding:18px;margin:18px 0;background:#fcfcfe}
+.cap{font-size:13.5px;color:var(--mute);margin-top:10px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.panel{border:1px solid var(--line);border-radius:6px;background:#fff;padding:10px 12px;font-size:13.5px}
+.panel h4{margin:0 0 8px;font-size:13px;color:var(--acc);text-transform:none}
+.panel pre{margin:0;font-size:12.5px;padding:8px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-family:Consolas,Menlo,monospace;font-size:12.5px}
+.kv b{color:var(--mute);font-weight:600}
+.stack{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.layer{border:2px solid var(--ink);border-radius:6px;padding:10px 14px;background:#fff}
+.layer.t{background:var(--acc2);border-color:var(--acc)}
+.layer.v{background:var(--warnbg);border-color:var(--warn)}
+.layer.db{background:var(--code)}
+.layer small{color:var(--mute)}
+.arrow{text-align:center;font-size:20px;line-height:1;color:var(--mute);padding:4px 0}
+.arrow span{font-size:12.5px;display:block}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-left:44px;margin:16px 0}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:700}
+.hl{background:#fff1a8;padding:0 2px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:700px){.three,.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+
+<h1>T24 Database Index Creation Guide</h1>
+<p class="sub" style="margin:0 0 6px;color:var(--ink)"><b>Prepared by:</b> Ahmad Said Nouh</p>
+<p class="sub">How T24 stores its tables in Oracle, how TAFJ turns your JQL into SQL, and how to add an index that makes a slow selection fast and survives STANDARD.SELECTION rebuilds.</p>
+
+<div class="note"><b>Scope:</b> every command and SQL statement here is for the <b>Oracle</b> implementation of TAFJ. On other databases (SQL Server, PostgreSQL, H2) the commands and syntax differ, but the idea and the steps are the same.</div>
+
+<nav class="toc"><b>Contents</b>
+<ol>
+<li><a href="#storage">How T24 stores a table: RECID + XMLRECORD</a></li>
+<li><a href="#why">Why Temenos chose this design</a></li>
+<li><a href="#tafj">TAFJ, the isolation layer between JQL and SQL</a></li>
+<li><a href="#view">What a view is, and the TAFJ default view</a></li>
+<li><a href="#find">Step 1: find your table's default view (JQL2SQL)</a></li>
+<li><a href="#ddl">Step 2: read the view script and find your field's expression</a></li>
+<li><a href="#create">Step 3: create the function-based index</a></li>
+<li><a href="#verify">Step 4: prove the index is used (EXPLAIN PLAN)</a></li>
+<li><a href="#rejected">Approaches that look tempting but don't work</a></li>
+<li><a href="#rules">When to index, and when not to</a></li>
+<li><a href="#case">Case study: a nightly service that silently skipped work</a></li>
+<li><a href="#checklist">One-page checklist</a></li>
+</ol></nav>
+
+<!-- ============================================================ -->
+<h2 id="storage">1. How T24 stores a table: RECID + XMLRECORD</h2>
+
+<p>If you open any T24 table in Oracle, you won't find one column per field. Every T24 table has just <b>two columns</b>:</p>
+
+<pre><code>SQL&gt; DESC FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS
+ Name        Null?     Type
+ ----------- --------- -------------
+ RECID       NOT NULL  VARCHAR2(255)    &lt;- the record @ID
+ XMLRECORD             SYS.XMLTYPE      &lt;- ALL the fields, as one XML document</code></pre>
+
+<p>Each field of the record lives inside the XML as an element called <code>&lt;cN&gt;</code>, where <b>N is the field number</b> from STANDARD.SELECTION (<code>SYS.FIELD.NO</code>). A multi-value field repeats the same element with an <code>m</code> attribute for each extra value.</p>
+
+<p>Let's follow <b>one record</b> through the three ways you meet it:</p>
+
+<div class="fig">
+<div class="three">
+  <div class="panel">
+    <h4>① What Oracle stores</h4>
+    <div class="kv"><b>RECID</b><span>WF-0000000001937-BNPL|INS1</span></div>
+    <p style="margin:8px 0 4px"><b>XMLRECORD</b></p>
+<pre>&lt;row id="WF-...|INS1"&gt;
+  &lt;c1&gt;20261102&lt;/c1&gt;
+  &lt;c2&gt;ACME STORES&lt;/c2&gt;
+  &lt;c3&gt;ACME01&lt;/c3&gt;
+  <span class="hl">&lt;c4&gt;20261102-WF-...-BNPL&lt;/c4&gt;</span>
+  &lt;c7&gt;refundAfterRma&lt;/c7&gt;
+  &lt;c22&gt;BNPL561146201758&lt;/c22&gt;
+  &lt;c24&gt;561146&lt;/c24&gt;
+  ...
+&lt;/row&gt;</pre>
+  </div>
+  <div class="panel">
+    <h4>② What you see in Browser</h4>
+    <div class="kv">
+      <b>@ID</b><span>WF-...|INS1</span>
+      <b>TRANSACTION.DATE</b><span>02 NOV 2026</span>
+      <b>MERCHANT.NAME</b><span>ACME STORES</span>
+      <b>MERCHANT.CODE</b><span>ACME01</span>
+      <b><span class="hl">ORDER.ID</span></b><span class="hl">20261102-WF-...-BNPL</span>
+      <b>REFUND.STATUS</b><span>refundAfterRma</span>
+      <b>SETTLEMENT.REF</b><span>BNPL561146201758</span>
+      <b>MERCHANT.ID</b><span>561146</span>
+    </div>
+  </div>
+  <div class="panel">
+    <h4>③ How you query it in JQL</h4>
+<pre>LIST FBNK.EB.EMK.BNPL.
+  SETTLEMENT.RPT.DETS
+  WITH <span class="hl">ORDER.ID</span> EQ
+  "20261102-WF-...-BNPL"</pre>
+    <p style="margin:8px 0 0">You use the <b>field name</b>. T24 knows that ORDER.ID means <code>c4</code> because STANDARD.SELECTION says so:</p>
+    <div class="kv" style="margin-top:6px"><b>SYS.FIELD.NAME</b><span>ORDER.ID</span><b>SYS.FIELD.NO</b><span>4</span><b>SYS.SINGLE.MULT</b><span>S</span></div>
+  </div>
+</div>
+<p class="cap">The same record three ways. Oracle sees one XML blob, Browser shows named fields, and JQL lets you filter by field name. The link between "ORDER.ID" and <code>&lt;c4&gt;</code> is the field number in STANDARD.SELECTION. (Sample values are illustrative.)</p>
+</div>
+
+<p><b>Key takeaway:</b> Oracle doesn't know that a column called "ORDER.ID" exists. To Oracle, ORDER.ID is "the text inside <code>&lt;c4&gt;</code> in the XMLRECORD column". That's why indexing a T24 field takes a little more work than indexing a normal SQL column.</p>
+
+<!-- ============================================================ -->
+<h2 id="why">2. Why Temenos chose this design</h2>
+
+<p><b>The short answer is history and multi-values.</b> T24 (originally Globus) was built on a <i>MultiValue</i> database: first UniVerse, then jBASE from around 2003. A single field in a MultiValue database can hold a list of values (multi-values), and each of those can hold its own list (sub-values). Think of OVERRIDE, INPUTTER or any associated multi-value group.</p>
+
+<p>When Temenos added support for Oracle and other mainstream relational databases, it wrote a database driver that <b>imitates the MultiValue behaviour inside the relational database</b>. To store the multi-dimensional fields, it used XML. So every T24 table in Oracle has two columns: RECID for the record's key and XMLRECORD for the data.</p>
+
+<p>XMLRECORD is created as <code>XMLTYPE</code> by default, but it can also be a BLOB or CLOB. TAFJ records which storage each table uses in its <code>TAFJ_VOC</code> file.</p>
+
+<h3>Why not a full relational schema (one column per field)?</h3>
+<div class="scroll"><table>
+<tr><th>Reason</th><th>What it means in practice</th></tr>
+<tr><td><b>Multi-values and sub-values</b></td><td>A field like OVERRIDE can have any number of values. A relational schema would need a child table for every multi-value field (hundreds of them), and joins on every read. In XML they are just repeated elements in the same record.</td></tr>
+<tr><td><b>One application, many databases</b></td><td>The same T24 code runs on Oracle, SQL Server, DB2, PostgreSQL, H2 and so on. A 2-column key/document table looks the same on all of them, so the application logic doesn't depend on the database.</td></tr>
+<tr><td><b>Schema changes without DDL</b></td><td>Adding a field, a local reference or a whole new application (EB.TABLE.DEFINITION / STANDARD.SELECTION) doesn't need an <code>ALTER TABLE</code> on a production database. The new field simply appears as a new <code>&lt;cN&gt;</code> in new records.</td></tr>
+<tr><td><b>Record-at-a-time programming model</b></td><td>T24 code reads and writes <b>whole records</b> (<code>F.READ</code>/<code>F.WRITE</code>, or <code>getRecord</code>/<code>write</code> in Java). Fetching one document by key is exactly what this design is fastest at.</td></tr>
+</table></div>
+
+<p>Temenos also added a <i>multi-column</i> option for specific tables that need very fast indexing. Multi-values are then stored in NVARCHAR columns. The trade-off is slower reads, because the record has to be rebuilt from all the columns, in exchange for faster indexing on single-value fields. It's a special-case setting, not the default.</p>
+
+<div class="warn"><b>The cost of this design:</b> reading one record by <b>@ID</b> is very fast, because RECID is the primary key. <b>Selecting by a field inside the XML</b> (<code>WITH ORDER.ID EQ ...</code>) means Oracle has to open the XML of <b>every row</b> unless an index exists. On a table with hundreds of thousands of records, that is what turns a selection into minutes or hours. Indexes fix exactly this.</div>
+
+<!-- ============================================================ -->
+<h2 id="tafj">3. TAFJ, the isolation layer between JQL and SQL</h2>
+
+<p>We write JQL (<code>SELECT … WITH …</code>) in T24, and Java code calls <code>DataAccess.selectRecords(...)</code>. Oracle doesn't understand JQL. <b>TAFJ (Temenos Application Framework for Java)</b> sits in between. It translates every JQL selection into SQL and sends that SQL to the database. At the end, <b>everything we run is SQL</b>.</p>
+
+<div class="fig">
+<div class="stack">
+  <div class="layer"><b>T24 layer</b>: Browser, enquiries, services, Java/L3 hooks<br><small><code>SELECT FBNK.EB.EMK.BNPL.SETTLEMENT.RPT.DETS WITH ORDER.ID EQ "X"</code></small></div>
+  <div class="arrow">▼<span>JQL</span></div>
+  <div class="layer t"><b>TAFJ</b>: translates JQL to SQL, and field names to view columns<br><small>FBNK.EB.EMK.BNPL.SETTLEMENT.RPT.DETS → <code>V_FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS</code>; ORDER.ID → <code>"ORDER_ID"</code></small></div>
+  <div class="arrow">▼<span>SQL</span></div>
+  <div class="layer v"><b>Default view</b> <code>V_FBNK_…</code>: one column per field, each extracted from the XML<br><small><code>XMLCast(XMLQuery('/row/c4[position()=1]' PASSING a.XMLRECORD …)) "ORDER_ID"</code></small></div>
+  <div class="arrow">▼<span>reads</span></div>
+  <div class="layer db"><b>Physical table</b> <code>FBNK_…</code>: RECID + XMLRECORD</div>
+</div>
+<p class="cap">Each layer only talks to the one below it. T24 never builds SQL itself, and Oracle never sees JQL.</p>
+</div>
+
+<p>Because of this layer:</p>
+<ul>
+<li>T24 code stays the same whatever the database.</li>
+<li>The <b>performance</b> of a selection is decided by Oracle, using the SQL that TAFJ generated. To make a selection faster, you have to look at that SQL, not the JQL.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="view">4. What a view is, and the TAFJ default view</h2>
+
+<h3>A view in one minute</h3>
+<p>A <b>view</b> is a <b>saved SELECT statement with a name</b>. It stores no data of its own. When you query a view, the database runs the saved SELECT underneath and gives you the result as if it were a table.</p>
+
+<pre><code>-- A view is just a named query
+CREATE VIEW V_ACTIVE_CUSTOMERS AS
+  SELECT ID, NAME FROM CUSTOMERS WHERE STATUS = 'ACTIVE';
+
+-- Querying it...
+SELECT NAME FROM V_ACTIVE_CUSTOMERS WHERE ID = 10;
+-- ...really runs:  SELECT NAME FROM (SELECT ID, NAME FROM CUSTOMERS WHERE STATUS='ACTIVE') WHERE ID = 10;</code></pre>
+
+<h3>The TAFJ default view</h3>
+<p>For every T24 table, TAFJ creates a <b>default view</b> called <code>V_&lt;table&gt;</code>. It turns the XML back into normal columns, one per STANDARD.SELECTION field, named after the field (dots become underscores). This view is the isolation layer from section 3: <b>TAFJ runs every selection against this view, not against the table.</b></p>
+
+<div class="fig">
+<div class="cols">
+<div class="panel"><h4>Physical table (what's stored)</h4>
+<div class="scroll"><table style="margin:0;font-size:12.5px">
+<tr><th>RECID</th><th>XMLRECORD</th></tr>
+<tr><td>WF-…|INS1</td><td><code>&lt;row&gt;&lt;c1&gt;…&lt;/c1&gt;&lt;c4&gt;ORD-A&lt;/c4&gt;…&lt;/row&gt;</code></td></tr>
+<tr><td>WF-…|INS2</td><td><code>&lt;row&gt;&lt;c1&gt;…&lt;/c1&gt;&lt;c4&gt;ORD-A&lt;/c4&gt;…&lt;/row&gt;</code></td></tr>
+<tr><td>WF-…|INS3</td><td><code>&lt;row&gt;&lt;c1&gt;…&lt;/c1&gt;&lt;c4&gt;ORD-B&lt;/c4&gt;…&lt;/row&gt;</code></td></tr>
+</table></div></div>
+<div class="panel"><h4>Default view (what TAFJ queries)</h4>
+<div class="scroll"><table style="margin:0;font-size:12.5px">
+<tr><th>RECID</th><th>TRANSACTION_DATE</th><th>ORDER_ID</th><th>MERCHANT_ID</th><th>…</th></tr>
+<tr><td>WF-…|INS1</td><td>20261102</td><td>ORD-A</td><td>561146</td><td>…</td></tr>
+<tr><td>WF-…|INS2</td><td>20261102</td><td>ORD-A</td><td>561146</td><td>…</td></tr>
+<tr><td>WF-…|INS3</td><td>20261103</td><td>ORD-B</td><td>561146</td><td>…</td></tr>
+</table></div></div>
+</div>
+<p class="cap">The view's <code>ORDER_ID</code> column isn't stored anywhere. Each time it is queried, Oracle extracts it from <code>&lt;c4&gt;</code> for every row.</p>
+</div>
+
+<p>This is the part of the real view script that defines ORDER_ID:</p>
+<pre><code>CREATE OR REPLACE FORCE EDITIONABLE VIEW "TXN_ADMIN"."V_FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS" (...) AS
+  SELECT a.RECID, a.XMLRECORD "THE_RECORD", a.RECID "DEAL_NO"
+  ,XMLCast(XMLQuery('/row/c1[position()=1]' PASSING a.XMLRECORD RETURNING CONTENT) AS VARCHAR(4000)) "TRANSACTION_DATE"
+  ...
+  <span class="hl">,XMLCast(XMLQuery('/row/c4[position()=1]' PASSING a.XMLRECORD RETURNING CONTENT) AS VARCHAR(4000)) "ORDER_ID"</span>
+  ...
+FROM "FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS" a</code></pre>
+
+<div class="warn"><b>Important: the view belongs to T24.</b> When the table's STANDARD.SELECTION record is rebuilt, TAFJ <b>regenerates the default view</b>. Any manual edit to the view is lost. We confirmed this in SIT. <b>Never fix performance by editing the view.</b> Put the fix on the table, which is what the method below does.</div>
+
+<!-- ============================================================ -->
+<h2 id="find">5. Step 1: find your table's default view (JQL2SQL)</h2>
+
+<p>Before you can index anything, you need the <b>exact SQL</b> TAFJ runs for your table, and from it the <b>name of the default view</b>. DBTools can translate JQL to SQL for you.</p>
+
+<p><b>Example:</b> I want to index a field on <code>AA.ARRANGEMENT</code>.</p>
+
+<ol class="steps">
+<li><b>Log in to DBTools</b> on the environment you're working in (SIT first).</li>
+<li><b>Run <code>JQL2SQL</code></b> followed by any JQL against your table. The field and value don't matter. Use <b>any existing field</b> as a dummy filter, because we only want to see how TAFJ translates the table name:
+<pre><code>JQL2SQL COUNT FBNK.AA.ARRANGEMENT WITH CURRENCY EQ "SAR"</code></pre></li>
+<li><b>Read the SQL it prints.</b> You'll get something like:
+<pre><code>SELECT COUNT(RECID) FROM <span class="hl">"V_FBNK_AA_ARRANGEMENT"</span> WHERE ...</code></pre>
+Ignore the rest of the statement. <b>The name after <code>FROM</code> is your default view</b>: <code>V_FBNK_AA_ARRANGEMENT</code>.</li>
+</ol>
+
+<div class="note"><b>Why we do this:</b> the DBA works in Oracle, not in T24. With the exact view name, the DBA can pull the view's script and see how each field is extracted from the XML. That extraction is what we will index.</div>
+
+<p>Two more things JQL2SQL is useful for:</p>
+<ul>
+<li>Run it with the <b>real field and real criteria</b> your code uses, for example <code>JQL2SQL SELECT FBNK.EB.EMK.BNPL.SETTLEMENT.RPT.DETS WITH ORDER.ID EQ "A" "B"</code>. You'll see whether TAFJ generates <code>IN (...)</code> or a chain of <code>OR</code>s, and which view column it filters on.</li>
+<li>Other examples from our environment:
+<pre><code>JQL2SQL COUNT FBNK.EB.EMKAN.MERCHANT WITH @ID EQ "2121" "1212"
+-&gt; SELECT COUNT(RECID) FROM "V_FBNK_EB_EMKAN_MERCHANT" WHERE (RECID = '2121' or RECID = '1212')</code></pre>
+Notice that <b>@ID</b> becomes the view's <code>RECID</code> column. The view passes RECID straight through from the table (<code>SELECT a.RECID …</code>), without any XML extraction, and RECID is the table's primary key. That's why selecting by @ID is always fast and never needs an extra index.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="ddl">6. Step 2: read the view script and find your field's expression</h2>
+
+<p>Give the view name to the DBA, or run this yourself if you have access:</p>
+<pre><code>SET LONG 1000000
+SELECT DBMS_METADATA.GET_DDL('VIEW', 'V_FBNK_AA_ARRANGEMENT', 'TXN_ADMIN') FROM dual;</code></pre>
+
+<p>In the output, find the line for <b>your field</b>. For ORDER.ID on RPT.DETS:</p>
+<pre><code>,XMLCast(XMLQuery('/row/c4[position()=1]' PASSING a.XMLRECORD RETURNING CONTENT) AS VARCHAR(4000)) "ORDER_ID"</code></pre>
+
+<p>Check it against STANDARD.SELECTION for the table:</p>
+<div class="scroll"><table>
+<tr><th>STANDARD.SELECTION</th><th>Value</th><th>Must match in the view</th></tr>
+<tr><td>SYS.FIELD.NAME</td><td>ORDER.ID</td><td>Column alias <code>"ORDER_ID"</code></td></tr>
+<tr><td>SYS.FIELD.NO</td><td>4</td><td><code>/row/<b>c4</b></code></td></tr>
+<tr><td>SYS.SINGLE.MULT</td><td>S (single value)</td><td><code>[position()=1]</code> takes value 1, which is the only value</td></tr>
+</table></div>
+
+<div class="warn"><b>Copy the expression exactly.</b> Oracle uses a function-based index only when the query's expression is <b>identical</b> to the indexed one: the same XPath, the same <code>[position()=1]</code> and the same <code>VARCHAR(4000)</code>. A small difference (<code>c4[1]</code> instead of <code>c4[position()=1]</code>, or <code>VARCHAR2(100)</code> instead of <code>4000</code>) can mean the index exists but is <b>never used</b>.</div>
+
+<!-- ============================================================ -->
+<h2 id="create">7. Step 3: create the function-based index</h2>
+
+<h3>What a function-based index is</h3>
+<p>A normal index stores the values of a column. A <b>function-based index stores the result of an expression</b>. Oracle runs the expression once for every row when the index is built, then once for each row that is inserted or updated. It keeps the results in a sorted B-tree, each pointing back to its row.</p>
+
+<div class="fig">
+<div class="cols">
+<div class="panel"><h4>Without index: every query</h4>
+<pre>for each of 250,000 rows:
+   open XMLRECORD
+   find &lt;c4&gt;
+   compare with 'X'
+→ full table scan, minutes</pre></div>
+<div class="panel"><h4>With function-based index</h4>
+<pre>index (sorted once, kept current):
+  ORD-A → row 1, row 2
+  ORD-B → row 3
+  ...
+query 'ORD-A' → jump to it → 2 rows
+→ index range scan, milliseconds</pre></div>
+</div>
+<p class="cap">The XML parsing moves from <b>every selection</b> to <b>once per write</b>.</p>
+</div>
+
+<h3>Template</h3>
+<pre><code>CREATE INDEX TXN_ADMIN.IX_&lt;TABLE_SHORT&gt;_&lt;FIELD&gt;_FBI
+  ON TXN_ADMIN.&lt;PHYSICAL_TABLE&gt;
+  (XMLCAST(
+     XMLQUERY('/row/c&lt;N&gt;[position()=1]' PASSING XMLRECORD RETURNING CONTENT)
+     AS VARCHAR2(4000)))          -- same path and length as the view
+  TABLESPACE TXN_DATA
+  ONLINE;                         -- T24 can keep writing during the build
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS('TXN_ADMIN', '&lt;PHYSICAL_TABLE&gt;', cascade =&gt; TRUE);</code></pre>
+
+<h3>Real example (RPT.DETS, ORDER.ID)</h3>
+<pre><code>CREATE INDEX TXN_ADMIN.IX_RPTDETS_ORDER_ID_FBI
+  ON TXN_ADMIN.FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS
+  (XMLCAST(
+     XMLQUERY('/row/c4[position()=1]' PASSING XMLRECORD RETURNING CONTENT)
+     AS VARCHAR2(4000)))
+  TABLESPACE TXN_DATA ONLINE;
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS('TXN_ADMIN','FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS', cascade =&gt; TRUE);</code></pre>
+
+<h3>What each part means</h3>
+<div class="scroll"><table>
+<tr><th>Part</th><th>Meaning</th></tr>
+<tr><td><code>CREATE INDEX</code> (not UNIQUE)</td><td>Duplicate values are allowed. Several records can share one value, for example several det records per order. <b>Never</b> use UNIQUE on a T24 field index.</td></tr>
+<tr><td><code>XMLQUERY('/row/c4[position()=1]' PASSING XMLRECORD …)</code></td><td>Opens the record's XML and takes the first <code>&lt;c4&gt;</code> element.</td></tr>
+<tr><td><code>XMLCAST(… AS VARCHAR2(4000))</code></td><td>Turns that XML element into plain text. A missing field becomes NULL.</td></tr>
+<tr><td><code>TABLESPACE TXN_DATA</code></td><td>Where the index is stored. Ask the DBA whether indexes go in a separate tablespace.</td></tr>
+<tr><td><code>ONLINE</code></td><td>Writes to the table continue while the index builds. The build takes the same time or a little longer, with only two very short locks, at the start and the end. Needs Oracle Enterprise Edition.</td></tr>
+<tr><td><code>GATHER_TABLE_STATS … cascade =&gt; TRUE</code></td><td>Refreshes the statistics the optimizer uses to choose between an index and a full scan. It only reads the table and takes no locks.</td></tr>
+</table></div>
+
+<h3>Why this method fits T24</h3>
+<div class="ok">
+<ul style="margin:0">
+<li><b>No code change</b> and <b>no change to any T24/TAFJ object</b>. The view, the table structure and STANDARD.SELECTION stay as they are.</li>
+<li><b>Survives STANDARD.SELECTION rebuilds.</b> A rebuild regenerates the view only. The index belongs to the table, and the regenerated view produces the same expression, so the index is still used.</li>
+<li><b>Always up to date.</b> Oracle maintains it on every write, in the same transaction.</li>
+<li><b>Identical results.</b> It is the view's own expression, so selections return exactly the same records, only faster.</li>
+<li><b>Rollback is one line:</b> <code>DROP INDEX …;</code></li>
+</ul></div>
+
+<!-- ============================================================ -->
+<h2 id="verify">8. Step 4: prove the index is used (EXPLAIN PLAN)</h2>
+
+<p>Creating an index doesn't guarantee Oracle will use it. Always check the execution plan <b>against the view</b>, using the same kind of SQL that JQL2SQL showed you:</p>
+
+<pre><code>EXPLAIN PLAN FOR
+  SELECT RECID FROM TXN_ADMIN.V_FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS
+  WHERE ("ORDER_ID" = '20251116-WF-1794147449223390-BNPL'
+      OR "ORDER_ID" = '20251116-WF-1794148001299799-BNPL'
+      OR "ORDER_ID" = '20251116-WF-1794208317899419-BNPL');
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);</code></pre>
+
+<div class="cols">
+<div class="bad"><b>Before: full table scan</b>
+<pre style="background:#fff">TABLE ACCESS FULL
+  FBNK_EB_EMK_BNPL_SETTLEMENT_RPT_DETS
+  Cost 482
+filter(EXTRACTVALUE(...'/row/c4[1]'...)='...' OR ...)
+Note: Unoptimized XML construct detected</pre>
+Every row's XML is parsed and compared.</div>
+<div class="ok"><b>After: index range scan</b>
+<pre style="background:#fff">INLIST ITERATOR
+ TABLE ACCESS BY INDEX ROWID BATCHED
+  INDEX RANGE SCAN IX_RPTDETS_ORDER_ID_FBI
+  Cost 1
+access(XMLQUERYVAL('/row/c4[position()=1]'...)='...' OR ...)</pre>
+Oracle matched the view's expression to the index.</div>
+</div>
+
+<p><b>What to look for:</b></p>
+<ul>
+<li><code>INDEX RANGE SCAN</code> with your index name means it worked.</li>
+<li><code>TABLE ACCESS FULL</code> means the index isn't being used. Re-check that your expression is identical to the view's (section 6).</li>
+<li>The predicate starts with <code>access(...)</code>, not <code>filter(...)</code>. "Access" means Oracle uses the index to <i>find</i> rows. "Filter" means it reads rows and then throws some away.</li>
+</ul>
+
+<p><b>Then, still in SIT:</b></p>
+<ol>
+<li>Rebuild the table's STANDARD.SELECTION and run the EXPLAIN PLAN again. It must still show the index.</li>
+<li>Input and authorise a record of that table in T24, to confirm writes still work.</li>
+<li>Run the actual JQL or service and compare the timing.</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="rejected">9. Approaches that look tempting but don't work</h2>
+<div class="scroll"><table>
+<tr><th>Approach</th><th>Why we rejected it</th></tr>
+<tr><td><b>Virtual column + index + editing the view</b> to read the new column</td><td>The plan was fast, but <b>rebuilding STANDARD.SELECTION regenerated the view and wiped the edit</b> (confirmed in SIT). The index then stopped being used, without any error.</td></tr>
+<tr><td><b>T24 alternate index</b> (<code>SYS.ALT.INDEX = Y</code> on STANDARD.SELECTION)</td><td>On our system field, T24 rejected <code>SYS.ALT.INDEX</code>, <code>SYS.IDX.FILE</code> and <code>SYS.INDEX.NULLS</code> with <b>"You cannot edit this field"</b>.</td></tr>
+<tr><td><b>Materialized view + index</b></td><td>TAFJ always queries its own default view, never a materialized view, so code changes would be needed. The data is also only as fresh as the last refresh, so new records would be missed.</td></tr>
+<tr><td><b>Index on a different expression</b> (for example <code>EXTRACTVALUE(...)</code> or a different length)</td><td>Oracle uses a function-based index only when the expression matches the one TAFJ's view uses.</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="rules">10. When to index, and when not to</h2>
+<div class="cols">
+<div class="ok"><b>Good candidates</b>
+<ul style="margin:0">
+<li>Fields used in <code>WITH … EQ …</code> by services, enquiries or COB jobs that are slow.</li>
+<li><b>Selective</b> fields, where each value matches few records (order IDs, references, account numbers).</li>
+<li><b>Single-value</b> fields (<code>SYS.SINGLE.MULT = S</code>).</li>
+<li>Fields written once and rarely changed.</li>
+</ul></div>
+<div class="bad"><b>Think twice</b>
+<ul style="margin:0">
+<li><b>Multi-value fields:</b> <code>[position()=1]</code> indexes only the <b>first</b> value, so a search on value 2 or later won't use it.</li>
+<li>Fields with very few distinct values (a status with three values on its own). Combine it with another field in a composite index instead.</li>
+<li>Tables that are written very heavily and rarely selected. Every index adds a small cost to each insert.</li>
+<li>Selections by <b>@ID</b>. These already use the RECID primary key.</li>
+</ul></div>
+</div>
+<div class="note"><b>Cost to writes:</b> T24 rewrites the whole XMLRECORD on every update, so Oracle re-evaluates the indexed expression on each write. If the field's value didn't change, it doesn't touch the index. For one row the extra cost is negligible compared with the cost of a T24 write. On write-heavy tables, test a bulk process in SIT before and after creating the index.</div>
+
+<!-- ============================================================ -->
+<h2 id="case">11. Case study: a nightly service that silently skipped work</h2>
+
+<p>This is a real issue we fixed. You don't need to know the business behind it: the pattern can happen on any project with a large custom table.</p>
+
+<h3>The setup</h3>
+<ul>
+<li>A <b>nightly service</b> (a multi-threaded T24 service) processes a list of <b>parent records</b>. For each parent, it loads that parent's <b>child records</b> from a custom detail table and updates them.</li>
+<li>The children are loaded with a JQL selection on a field that points to their parent, a <b>reference field</b> (in our case named <code>ORDER.ID</code>) stored inside XMLRECORD as <code>&lt;c4&gt;</code>:
+<pre><code>SELECT &lt;DETAIL.TABLE&gt; WITH ORDER.ID EQ "id1" "id2" "id3" ...</code></pre></li>
+<li>The service selects up to 500 parent IDs in one statement to cut down the number of database calls.</li>
+</ul>
+
+<h3>The symptom</h3>
+<div class="bad">After each run, <b>some parents were never processed</b>. Their records stayed in their original status, and nothing in the service output explained why. Other parents in the same run were processed normally.</div>
+
+<h3>Why it couldn't be reproduced in SIT</h3>
+<p>We loaded SIT with a heavy case (about 1,300 child records for a single parent) and the service worked perfectly. The difference was the <b>size of the detail table</b>:</p>
+<div class="scroll"><table>
+<tr><th></th><th>SIT</th><th>Production</th></tr>
+<tr><td>Records in the detail table</td><td>~11,000</td><td>~250,000</td></tr>
+<tr><td>Work per selection, without an index</td><td>Small</td><td>~23 times more</td></tr>
+</table></div>
+<p>Without an index, a selection on a field inside the XML parses <b>every record in the table</b>, so it gets slower as the <b>whole table</b> grows, not just as the data you're selecting grows. SIT was simply too small to show the problem.</p>
+
+<h3>How we found it</h3>
+<p>We deployed a version of the service with detailed file logging: a timestamp before and after every database call. The production logs showed exactly where it stopped:</p>
+<div class="scroll"><table>
+<tr><th>IDs in one selection</th><th>Time for that one SELECT</th><th>What happened next</th></tr>
+<tr><td>50</td><td>~21 minutes</td><td rowspan="2"><code>TAFJERR-1110: Session Logoff</code>. The session was ended, every later call failed, and nothing was written for that parent.</td></tr>
+<tr><td>195</td><td>~60 minutes</td></tr>
+</table></div>
+<p>Reading the same records <b>by @ID</b> took under a second, so the database itself was healthy. Only the <b>selection by a field inside the XML</b> was slow.</p>
+
+<h3>The fix</h3>
+<ol>
+<li>Found the view with <code>JQL2SQL</code> (section 5).</li>
+<li>Copied the <code>ORDER_ID</code> expression from the view script (section 6).</li>
+<li>Created a function-based index on exactly that expression (section 7). There was <b>no code change and no change to T24 objects</b>.</li>
+<li>Proved it with EXPLAIN PLAN (section 8): a <code>TABLE ACCESS FULL</code> with cost 482 became an <code>INDEX RANGE SCAN</code> with cost 1.</li>
+</ol>
+
+<div class="note"><b>Lessons you can reuse on any project:</b>
+<ul style="margin:0">
+<li>"Works in SIT, fails in production" combined with "it depends on data volume" usually points to a <b>missing index</b>.</li>
+<li>A selection that is too slow doesn't always fail loudly. The session can be ended, and the work is silently skipped. Log the timing of database calls in batch services.</li>
+<li>Big <code>EQ "a" "b" "c"…</code> lists make an unindexed selection worse, because every row is compared against every value.</li>
+<li>Before blaming the code, run <code>JQL2SQL</code> and <code>EXPLAIN PLAN</code>. One <code>TABLE ACCESS FULL</code> on a large table explains a lot.</li>
+</ul></div>
+
+<!-- ============================================================ -->
+<h2 id="checklist">12. One-page checklist</h2>
+<ol>
+<li>Identify the slow selection: the JQL, the table and the field.</li>
+<li>In <b>STANDARD.SELECTION</b>, note the field's <code>SYS.FIELD.NO</code> (the <code>cN</code>) and check that it's single-valued.</li>
+<li>In <b>DBTools</b>, run <code>JQL2SQL COUNT FBNK.&lt;TABLE&gt; WITH &lt;ANY.FIELD&gt; EQ "x"</code> and note the view name after <code>FROM</code>.</li>
+<li>Get the view DDL (<code>DBMS_METADATA.GET_DDL</code>) and <b>copy the field's exact expression</b>.</li>
+<li>In SIT, run EXPLAIN PLAN against the view to record the "before" plan.</li>
+<li>Create the function-based index with the <b>identical</b> expression, <code>ONLINE</code>, then gather statistics.</li>
+<li>Run EXPLAIN PLAN again. It must show <code>INDEX RANGE SCAN</code> on your index.</li>
+<li>Rebuild STANDARD.SELECTION and check the plan again. Input and authorise one record.</li>
+<li>Raise a ticket with the before and after plans, then deploy to production outside COB and service windows.</li>
+<li>Rollback if needed: <code>DROP INDEX &lt;name&gt;;</code></li>
+</ol>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://kiwix.lema.org/stackoverflow.com_en_all_2023-11/questions/51869740/temenos-t24-database-structure">Temenos T24 database structure (Stack Overflow archive)</a>: the MultiValue history and the RECID + XMLRECORD design</li>
+<li><a href="https://kaweah.freedombox.rocks/kiwix/stackoverflow.com_en_all_2023-11/questions/40441185/how-temenos-t24-stores-data">How Temenos T24 stores data (Stack Overflow archive)</a>: the 2-column structure and TAFJ_VOC</li>
+<li><a href="https://www.scribd.com/document/447133560/TAFJ-R18-Release-Notes-doc">TAFJ R18 release notes</a>: the multi-column option</li>
+<li><a href="https://docs.oracle.com/en/database/oracle/oracle-database/23/admin/managing-indexes.html">Oracle Database: Managing Indexes</a></li>
+<li>Our SIT tests (November 2026)</li>
+</ul>
+
+</main>
+</body>
+</html>
